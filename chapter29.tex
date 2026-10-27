@@ -128,47 +128,47 @@ following point and vector:
 
 \index{complex@\texttt{complex}}
 
-The C++ complex number class \texttt{complex} is
-useful when solving geometric problems.
-Using the class we can represent points and vectors
-as complex numbers, and the class contains tools
-that are useful in geometry.
+Rust does not have a built-in complex number type,
+but it is easy to define a point/vector type
+that is useful when solving geometric problems.
+Using this type we can represent points and vectors,
+and define helper functions that are useful in geometry.
 
 In the following code, \texttt{C} is the type of
 a coordinate and \texttt{P} is the type of a point or a vector.
-In addition, the code defines macros \texttt{X} and \texttt{Y}
-that can be used to refer to x and y coordinates.
+The fields \texttt{x} and \texttt{y} refer to the coordinates.
 
 \begin{lstlisting}
-typedef long long C;
-typedef complex<C> P;
-#define X real()
-#define Y imag()
+type C = f64;
+
+struct P {
+    x: C,
+    y: C,
+}
 \end{lstlisting}
 
 For example, the following code defines a point $p=(4,2)$
 and prints its x and y coordinates:
 
 \begin{lstlisting}
-P p = {4,2};
-cout << p.X << " " << p.Y << "\n"; // 4 2
+let p = P { x: 4.0, y: 2.0 };
+println!("{} {}", p.x, p.y); // 4 2
 \end{lstlisting}
 
 The following code defines vectors $v=(3,1)$ and $u=(2,2)$,
 and after that calculates the sum $s=v+u$.
 
 \begin{lstlisting}
-P v = {3,1};
-P u = {2,2};
-P s = v+u;
-cout << s.X << " " << s.Y << "\n"; // 5 3
+let v = P { x: 3.0, y: 1.0 };
+let u = P { x: 2.0, y: 2.0 };
+let s = P { x: v.x + u.x, y: v.y + u.y };
+println!("{} {}", s.x, s.y); // 5 3
 \end{lstlisting}
 
 In practice,
 an appropriate coordinate type is usually
-\texttt{long long} (integer) or \texttt{long double}
-(real number).
-It is a good idea to use integer whenever possible,
+`i64` (integer) or `f64` (real number).
+It is a good idea to use integers whenever possible,
 because calculations with integers are exact.
 If real numbers are needed,
 precision errors should be taken into account
@@ -180,7 +180,7 @@ where $\epsilon$ is a small number (for example, $\epsilon=10^{-9}$).
 \subsubsection*{Functions}
 
 In the following examples, the coordinate type is
-\texttt{long double}.
+\texttt{f64}.
 
 The function $\texttt{abs}(v)$ calculates the length
 $|v|$ of a vector $v=(x,y)$
@@ -194,9 +194,9 @@ of the vector $(x_2-x_1,y_2-y_1)$.
 The following code calculates the distance
 between points $(4,2)$ and $(3,-1)$:
 \begin{lstlisting}
-P a = {4,2};
-P b = {3,-1};
-cout << abs(b-a) << "\n"; // 3.16228
+let a = P { x: 4.0, y: 2.0 };
+let b = P { x: 3.0, y: -1.0 };
+println!("{}", dist(b, a)); // 3.16228
 \end{lstlisting}
 
 The function $\texttt{arg}(v)$ calculates the
@@ -217,10 +217,10 @@ the vector $(4,2)$, rotates it $1/2$ radians
 counterclockwise, and then calculates the angle again:
 
 \begin{lstlisting}
-P v = {4,2};
-cout << arg(v) << "\n"; // 0.463648
-v *= polar(1.0,0.5);
-cout << arg(v) << "\n"; // 0.963648
+let mut v = P { x: 4.0, y: 2.0 };
+println!("{}", arg(v)); // 0.463648
+v = rotate(v, 0.5);
+println!("{}", arg(v)); // 0.963648
 \end{lstlisting}
 
 \section{Points and lines}
@@ -269,12 +269,12 @@ The following picture illustrates the above cases:
 For example, in the first case
 $a=(4,2)$ and $b=(1,2)$.
 The following code calculates the cross product
-using the class \texttt{complex}:
+using the point type:
 
 \begin{lstlisting}
-P a = {4,2};
-P b = {1,2};
-C p = (conj(a)*b).Y; // 6
+let a = P { x: 4.0, y: 2.0 };
+let b = P { x: 1.0, y: 2.0 };
+let p = cross(a, b); // 6
 \end{lstlisting}
 
 The above code works, because

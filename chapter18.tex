@@ -1100,10 +1100,10 @@ which ensures that the algorithm is efficient.
 To swap the contents of two data structures $a$ and $b$
 efficiently, we can just use the following code:
 \begin{lstlisting}
-swap(a,b);
+std::mem::swap(&mut a, &mut b);
 \end{lstlisting}
 It is guaranteed that the above code works in constant time
-when $a$ and $b$ are C++ standard library data structures.
+when \texttt{a} and \texttt{b} are Rust data structures.
 
 \subsubsection{Lowest common ancestors}
 

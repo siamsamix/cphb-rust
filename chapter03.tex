@@ -85,10 +85,10 @@ that are not in correct order,
 the algorithm swaps them.
 The algorithm can be implemented as follows:
 \begin{lstlisting}
-for (int i = 0; i < n; i++) {
-    for (int j = 0; j < n-1; j++) {
-        if (array[j] > array[j+1]) {
-            swap(array[j],array[j+1]);
+for i in 0..n {
+    for j in 0..n-1 {
+        if array[j] > array[j+1] {
+            array.swap(j, j+1);
         }
     }
 }
@@ -485,7 +485,7 @@ but it can only be used when the constant $c$
 is small enough, so that the array elements can
 be used as indices in the bookkeeping array.
 
-\section{Sorting in C++}
+\section{Sorting in Rust}
 
 \index{sort@\texttt{sort}}
 
@@ -493,24 +493,24 @@ It is almost never a good idea to use
 a home-made sorting algorithm
 in a contest, because there are good
 implementations available in programming languages.
-For example, the C++ standard library contains
-the function \texttt{sort} that can be easily used for
-sorting arrays and other data structures.
+For example, the Rust standard library contains
+the method \texttt{sort} that can be easily used for
+sorting vectors and other data structures.
 
-There are many benefits in using a library function.
+There are many benefits in using a library method.
 First, it saves time because there is no need to
-implement the function.
+implement the method.
 Second, the library implementation is
 certainly correct and efficient: it is not probable
 that a home-made sorting function would be better.
 
 In this section we will see how to use the
-C++ \texttt{sort} function.
+Rust \texttt{sort} method.
 The following code sorts
 a vector in increasing order:
 \begin{lstlisting}
-vector<int> v = {4,2,5,3,5,8,3};
-sort(v.begin(),v.end());
+let mut v = vec![4,2,5,3,5,8,3];
+v.sort();
 \end{lstlisting}
 After the sorting, the contents of the
 vector will be
@@ -518,19 +518,18 @@ $[2,3,3,4,5,5,8]$.
 The default sorting order is increasing,
 but a reverse order is possible as follows:
 \begin{lstlisting}
-sort(v.rbegin(),v.rend());
+v.sort_by(|a, b| b.cmp(a));
 \end{lstlisting}
 An ordinary array can be sorted as follows:
 \begin{lstlisting}
-int n = 7; // array size
-int a[] = {4,2,5,3,5,8,3};
-sort(a,a+n);
+let mut a = [4,2,5,3,5,8,3];
+a.sort();
 \end{lstlisting}
 \newpage
 The following code sorts the string \texttt{s}:
 \begin{lstlisting}
-string s = "monkey";
-sort(s.begin(), s.end());
+let mut s: Vec<char> = "monkey".chars().collect();
+s.sort();
 \end{lstlisting}
 Sorting a string means that the characters
 of the string are sorted.
@@ -546,40 +545,28 @@ of the elements to be sorted.
 When sorting, this operator will be used
 whenever it is necessary to find out the order of two elements.
 
-Most C++ data types have a built-in comparison operator,
+Most Rust data types implement the \texttt{Ord} trait,
 and elements of those types can be sorted automatically.
 For example, numbers are sorted according to their values
 and strings are sorted in alphabetical order.
 
-\index{pair@\texttt{pair}}
-
-Pairs (\texttt{pair}) are sorted primarily according to their
-first elements (\texttt{first}).
-However, if the first elements of two pairs are equal,
-they are sorted according to their second elements (\texttt{second}):
+Tuples are sorted primarily according to their
+first elements.
+However, if the first elements of two tuples are equal,
+they are sorted according to their second elements:
 \begin{lstlisting}
-vector<pair<int,int>> v;
-v.push_back({1,5});
-v.push_back({2,3});
-v.push_back({1,2});
-sort(v.begin(), v.end());
+let mut v = vec![(1,5), (2,3), (1,2)];
+v.sort();
 \end{lstlisting}
 After this, the order of the pairs is
 $(1,2)$, $(1,5)$ and $(2,3)$.
 
-\index{tuple@\texttt{tuple}}
-
-In a similar way, tuples (\texttt{tuple})
+In a similar way, tuples with more elements
 are sorted primarily by the first element,
-secondarily by the second element, etc.\footnote{Note that in some older compilers,
-the function \texttt{make\_tuple} has to be used to create a tuple instead of
-braces (for example, \texttt{make\_tuple(2,1,4)} instead of \texttt{\{2,1,4\}}).}:
+secondarily by the second element, etc.:
 \begin{lstlisting}
-vector<tuple<int,int,int>> v;
-v.push_back({2,1,4});
-v.push_back({1,5,3});
-v.push_back({2,1,3});
-sort(v.begin(), v.end());
+let mut v = vec![(2,1,4), (1,5,3), (2,1,3)];
+v.sort();
 \end{lstlisting}
 After this, the order of the tuples is
 $(1,5,3)$, $(2,1,3)$ and $(2,1,4)$.
@@ -588,50 +575,45 @@ $(1,5,3)$, $(2,1,3)$ and $(2,1,4)$.
 
 User-defined structs do not have a comparison
 operator automatically.
-The operator should be defined inside
-the struct as a function
-\texttt{operator<},
-whose parameter is another element of the same type.
-The operator should return \texttt{true}
-if the element is smaller than the parameter,
-and \texttt{false} otherwise.
+The comparison can be derived by deriving
+the \texttt{Ord} trait for the struct.
+The derived comparison compares the fields
+in the order they are declared.
 
 For example, the following struct \texttt{P}
 contains the x and y coordinates of a point.
-The comparison operator is defined so that
+The \texttt{Ord} trait is derived so that
 the points are sorted primarily by the x coordinate
 and secondarily by the y coordinate.
 
 \begin{lstlisting}
+#[derive(Ord, PartialOrd, Eq, PartialEq)]
 struct P {
-    int x, y;
-    bool operator<(const P &p) {
-        if (x != p.x) return x < p.x;
-        else return y < p.y;
-    }
-};
+    x: i32,
+    y: i32,
+}
 \end{lstlisting}
 
 \subsubsection{Comparison functions}
 
 \index{comparison function}
 
-It is also possible to give an external
-\key{comparison function} to the \texttt{sort} function
-as a callback function.
 For example, the following comparison function \texttt{comp}
 sorts strings primarily by length and secondarily
 by alphabetical order:
 
 \begin{lstlisting}
-bool comp(string a, string b) {
-    if (a.size() != b.size()) return a.size() < b.size();
-    return a < b;
+fn comp(a: &String, b: &String) -> std::cmp::Ordering {
+    if a.len() != b.len() {
+        a.len().cmp(&b.len())
+    } else {
+        a.cmp(b)
+    }
 }
 \end{lstlisting}
 Now a vector of strings can be sorted as follows:
 \begin{lstlisting}
-sort(v.begin(), v.end(), comp);
+v.sort_by(comp);
 \end{lstlisting}
 
 \section{Binary search}
@@ -645,8 +627,8 @@ For example, the following code searches for
 an element $x$ in an array:
 
 \begin{lstlisting}
-for (int i = 0; i < n; i++) {
-    if (array[i] == x) {
+for i in 0..n {
+    if array[i] == x {
         // x found at index i
     }
 }
@@ -688,14 +670,15 @@ depending on the value of the middle element.
 
 The above idea can be implemented as follows:
 \begin{lstlisting}
-int a = 0, b = n-1;
-while (a <= b) {
-    int k = (a+b)/2;
-    if (array[k] == x) {
+let mut a = 0;
+let mut b = n - 1;
+while a <= b {
+    let k = (a + b) / 2;
+    if array[k] == x {
         // x found at index k
     }
-    if (array[k] > x) b = k-1;
-    else a = k+1;
+    if array[k] > x { b = k - 1; }
+    else { a = k + 1; }
 }
 \end{lstlisting}
 
@@ -722,11 +705,13 @@ been found or we know that it does not appear in the array.
 
 The following code implements the above idea:
 \begin{lstlisting}
-int k = 0;
-for (int b = n/2; b >= 1; b /= 2) {
-    while (k+b < n && array[k+b] <= x) k += b;
+let mut k = 0;
+let mut b = n / 2;
+while b >= 1 {
+    while k + b < n && array[k + b] <= x { k += b; }
+    b /= 2;
 }
-if (array[k] == x) {
+if array[k] == x {
     // x found at index k
 }
 \end{lstlisting}
@@ -737,28 +722,29 @@ The time complexity of the algorithm is $O(\log n)$,
 because the code in the \texttt{while} loop
 is performed at most twice for each jump length.
 
-\subsubsection{C++ functions}
+\subsubsection{Rust functions}
 
-The C++ standard library contains the following functions
+Rust's standard library contains the following methods
 that are based on binary search and work in logarithmic time:
 
 \begin{itemize}
-\item \texttt{lower\_bound} returns a pointer to the
-first array element whose value is at least $x$.
-\item \texttt{upper\_bound} returns a pointer to the
-first array element whose value is larger than $x$.
-\item \texttt{equal\_range} returns both above pointers.
+\item \texttt{slice::partition\_point} returns the index of the
+first array element for which a predicate is false;
+used with \texttt{|y| y < x} it finds the first element
+whose value is at least $x$.
+\item \texttt{slice::binary\_search} searches for an element
+and returns its index if found.
 \end{itemize}
 
-The functions assume that the array is sorted.
-If there is no such element, the pointer points to
+The methods assume that the array is sorted.
+If there is no such element, the index points to
 the element after the last array element.
 For example, the following code finds out whether
 an array contains an element with value $x$:
 
 \begin{lstlisting}
-auto k = lower_bound(array,array+n,x)-array;
-if (k < n && array[k] == x) {
+let k = array.partition_point(|&y| y < x);
+if k < n && array[k] == x {
     // x found at index k
 }
 \end{lstlisting}
@@ -767,16 +753,19 @@ Then, the following code counts the number of elements
 whose value is $x$:
 
 \begin{lstlisting}
-auto a = lower_bound(array, array+n, x);
-auto b = upper_bound(array, array+n, x);
-cout << b-a << "\n";
+let a = array.partition_point(|&y| y < x);
+let b = array.partition_point(|&y| y <= x);
+println!("{}", b - a);
 \end{lstlisting}
 
-Using \texttt{equal\_range}, the code becomes shorter:
+The same result can be obtained with
+\texttt{binary\_search}:
 
 \begin{lstlisting}
-auto r = equal_range(array, array+n, x);
-cout << r.second-r.first << "\n";
+match array.binary_search(&x) {
+    Ok(k) => println!("found at {}", k),
+    Err(_) => println!("not found"),
+}
 \end{lstlisting}
 
 \subsubsection{Finding the smallest solution}
@@ -805,11 +794,13 @@ $\texttt{ok}(x)$ & \texttt{false} & \texttt{false}
 Now, the value of $k$ can be found using binary search:
 
 \begin{lstlisting}
-int x = -1;
-for (int b = z; b >= 1; b /= 2) {
-    while (!ok(x+b)) x += b;
+let mut x = -1;
+let mut b = z;
+while b >= 1 {
+    while !ok(x + b) { x += b; }
+    b /= 2;
 }
-int k = x+1;
+let k = x + 1;
 \end{lstlisting}
 
 The search finds the largest value of $x$ for which
@@ -849,11 +840,13 @@ because $f(x+1)>f(x+2)$.
 The following code implements the search: 
 
 \begin{lstlisting}
-int x = -1;
-for (int b = z; b >= 1; b /= 2) {
-    while (f(x+b) < f(x+b+1)) x += b;
+let mut x = -1;
+let mut b = z;
+while b >= 1 {
+    while f(x + b) < f(x + b + 1) { x += b; }
+    b /= 2;
 }
-int k = x+1;
+let k = x + 1;
 \end{lstlisting}
 
 Note that unlike in the ordinary binary search,

@@ -12,7 +12,7 @@ The crucial question is: which operations
 are efficient in the chosen data structure?
 
 This chapter introduces the most important
-data structures in the C++ standard library.
+data structures in the Rust standard library.
 It is a good idea to use the standard library
 whenever possible,
 because it will save a lot of time.
@@ -28,35 +28,35 @@ in the standard library.
 A \key{dynamic array} is an array whose
 size can be changed during the execution
 of the program.
-The most popular dynamic array in C++ is
-the \texttt{vector} structure,
+The most popular dynamic array in Rust is
+the \texttt{Vec} type,
 which can be used almost like an ordinary array.
 
 The following code creates an empty vector and
 adds three elements to it:
 
 \begin{lstlisting}
-vector<int> v;
-v.push_back(3); // [3]
-v.push_back(2); // [3,2]
-v.push_back(5); // [3,2,5]
+let mut v = Vec::new();
+v.push(3); // [3]
+v.push(2); // [3,2]
+v.push(5); // [3,2,5]
 \end{lstlisting}
 
 After this, the elements can be accessed like in an ordinary array:
 
 \begin{lstlisting}
-cout << v[0] << "\n"; // 3
-cout << v[1] << "\n"; // 2
-cout << v[2] << "\n"; // 5
+println!("{}", v[0]); // 3
+println!("{}", v[1]); // 2
+println!("{}", v[2]); // 5
 \end{lstlisting}
 
-The function \texttt{size} returns the number of elements in the vector.
+The method \texttt{len} returns the number of elements in the vector.
 The following code iterates through
 the vector and prints all elements in it:
 
 \begin{lstlisting}
-for (int i = 0; i < v.size(); i++) {
-    cout << v[i] << "\n";
+for i in 0..v.len() {
+    println!("{}", v[i]);
 }
 \end{lstlisting}
 
@@ -64,29 +64,29 @@ for (int i = 0; i < v.size(); i++) {
 A shorter way to iterate through a vector is as follows:
 
 \begin{lstlisting}
-for (auto x : v) {
-    cout << x << "\n";
+for x in &v {
+    println!("{}", x);
 }
 \end{lstlisting}
 \end{samepage}
 
-The function \texttt{back} returns the last element
+The method \texttt{last} returns the last element
 in the vector, and
-the function \texttt{pop\_back} removes the last element:
+the method \texttt{pop} removes the last element:
 
 \begin{lstlisting}
-vector<int> v;
-v.push_back(5);
-v.push_back(2);
-cout << v.back() << "\n"; // 2
-v.pop_back();
-cout << v.back() << "\n"; // 5
+let mut v = Vec::new();
+v.push(5);
+v.push(2);
+println!("{}", v.last().unwrap()); // 2
+v.pop();
+println!("{}", v.last().unwrap()); // 5
 \end{lstlisting}
 
 The following code creates a vector with five elements:
 
 \begin{lstlisting}
-vector<int> v = {2,4,2,5,1};
+let v = vec![2,4,2,5,1];
 \end{lstlisting}
 
 Another way to create a vector is to give the number
@@ -94,11 +94,11 @@ of elements and the initial value for each element:
 
 \begin{lstlisting}
 // size 10, initial value 0
-vector<int> v(10);
+let v = vec![0; 10];
 \end{lstlisting}
 \begin{lstlisting}
 // size 10, initial value 5
-vector<int> v(10, 5);
+let v = vec![5; 10];
 \end{lstlisting}
 
 The internal implementation of a vector
@@ -109,30 +109,32 @@ a new array is allocated and all the
 elements are moved to the new array.
 However, this does not happen often and the
 average time complexity of
-\texttt{push\_back} is $O(1)$.
+\texttt{push} is $O(1)$.
 
 \index{string}
 
-The \texttt{string} structure
+The \texttt{String} type
 is also a dynamic array that can be used almost like a vector.
 In addition, there is special syntax for strings
 that is not available in other data structures.
 Strings can be combined using the \texttt{+} symbol.
-The function $\texttt{substr}(k,x)$ returns the substring
-that begins at position $k$ and has length $x$,
-and the function $\texttt{find}(\texttt{t})$ finds the position
-of the first occurrence of a substring \texttt{t}.
+The method \texttt{substr} is not available,
+but string slices can be used to extract substrings,
+and the method \texttt{find} finds the position
+of the first occurrence of a substring.
 
 The following code presents some string operations:
 
 \begin{lstlisting}
-string a = "hatti";
-string b = a+a;
-cout << b << "\n"; // hattihatti
-b[5] = 'v';
-cout << b << "\n"; // hattivatti
-string c = b.substr(3,4);
-cout << c << "\n"; // tiva
+let mut a = String::from("hatti");
+let mut b = format!("{}{}", a, a);
+println!("{}", b); // hattihatti
+let mut chars: Vec<char> = b.chars().collect();
+chars[5] = 'v';
+b = chars.into_iter().collect();
+println!("{}", b); // hattivatti
+let c = &b[3..7];
+println!("{}", c); // tiva
 \end{lstlisting}
 
 \section{Set structures}
@@ -144,41 +146,43 @@ maintains a collection of elements.
 The basic operations of sets are element
 insertion, search and removal.
 
-The C++ standard library contains two set
+The Rust standard library contains two set
 implementations:
-The structure \texttt{set} is based on a balanced
+The structure \texttt{BTreeSet} is based on a balanced
 binary tree and its operations work in $O(\log n)$ time.
-The structure \texttt{unordered\_set} uses hashing,
+The structure \texttt{HashSet} uses hashing,
 and its operations work in $O(1)$ time on average.
 
 The choice of which set implementation to use
 is often a matter of taste.
-The benefit of the \texttt{set} structure
+The benefit of the \texttt{BTreeSet} structure
 is that it maintains the order of the elements
 and provides functions that are not available
-in \texttt{unordered\_set}.
-On the other hand, \texttt{unordered\_set}
+in \texttt{HashSet}.
+On the other hand, \texttt{HashSet}
 can be more efficient.
 
 The following code creates a set
 that contains integers,
 and shows some of the operations.
-The function \texttt{insert} adds an element to the set,
-the function \texttt{count} returns the number of occurrences
-of an element in the set,
-and the function \texttt{erase} removes an element from the set.
+The method \texttt{insert} adds an element to the set,
+the method \texttt{contains} checks whether
+an element is in the set,
+and the method \texttt{remove} removes an element from the set.
 
 \begin{lstlisting}
-set<int> s;
+use std::collections::BTreeSet;
+
+let mut s = BTreeSet::new();
 s.insert(3);
 s.insert(2);
 s.insert(5);
-cout << s.count(3) << "\n"; // 1
-cout << s.count(4) << "\n"; // 0
-s.erase(3);
+println!("{}", s.contains(&3) as i32); // 1
+println!("{}", s.contains(&4) as i32); // 0
+s.remove(&3);
 s.insert(4);
-cout << s.count(3) << "\n"; // 0
-cout << s.count(4) << "\n"; // 1
+println!("{}", s.contains(&3) as i32); // 0
+println!("{}", s.contains(&4) as i32); // 1
 \end{lstlisting}
 
 A set can be used mostly like a vector,
@@ -188,58 +192,74 @@ The following code creates a set,
 prints the number of elements in it, and then
 iterates through all the elements:
 \begin{lstlisting}
-set<int> s = {2,5,6,8};
-cout << s.size() << "\n"; // 4
-for (auto x : s) {
-    cout << x << "\n";
+use std::collections::BTreeSet;
+
+let s = BTreeSet::from([2,5,6,8]);
+println!("{}", s.len()); // 4
+for x in &s {
+    println!("{}", x);
 }
 \end{lstlisting}
 
 An important property of sets is
 that all their elements are \emph{distinct}.
-Thus, the function \texttt{count} always returns
-either 0 (the element is not in the set)
-or 1 (the element is in the set),
-and the function \texttt{insert} never adds
+Thus, the method \texttt{contains} always returns
+either \texttt{false} (the element is not in the set)
+or \texttt{true} (the element is in the set),
+and the method \texttt{insert} never adds
 an element to the set if it is
 already there.
 The following code illustrates this:
 
 \begin{lstlisting}
-set<int> s;
+use std::collections::BTreeSet;
+
+let mut s = BTreeSet::new();
 s.insert(5);
 s.insert(5);
 s.insert(5);
-cout << s.count(5) << "\n"; // 1
+println!("{}", s.contains(&5)); // true
 \end{lstlisting}
 
-C++ also contains the structures
-\texttt{multiset} and \texttt{unordered\_multiset}
-that otherwise work like \texttt{set}
-and \texttt{unordered\_set}
-but they can contain multiple instances of an element.
-For example, in the following code all three instances
-of the number 5 are added to a multiset:
+Rust does not have a multiset in the standard library,
+but a multiset can be implemented using
+\texttt{BTreeMap} where each value stores
+the number of instances of the key.
+The following code adds three instances
+of the number 5:
 
 \begin{lstlisting}
-multiset<int> s;
-s.insert(5);
-s.insert(5);
-s.insert(5);
-cout << s.count(5) << "\n"; // 3
+use std::collections::BTreeMap;
+
+let mut s = BTreeMap::new();
+*s.entry(5).or_insert(0) += 1;
+*s.entry(5).or_insert(0) += 1;
+*s.entry(5).or_insert(0) += 1;
+println!("{}", s.get(&5).copied().unwrap_or(0)); // 3
 \end{lstlisting}
-The function \texttt{erase} removes
+The method \texttt{remove} removes
 all instances of an element
-from a multiset:
+from the multiset:
 \begin{lstlisting}
-s.erase(5);
-cout << s.count(5) << "\n"; // 0
+use std::collections::BTreeMap;
+
+let mut s = BTreeMap::new();
+*s.entry(5).or_insert(0) += 3;
+s.remove(&5);
+println!("{}", s.get(&5).copied().unwrap_or(0)); // 0
 \end{lstlisting}
 Often, only one instance should be removed,
 which can be done as follows:
 \begin{lstlisting}
-s.erase(s.find(5));
-cout << s.count(5) << "\n"; // 2
+use std::collections::BTreeMap;
+
+let mut s = BTreeMap::new();
+*s.entry(5).or_insert(0) += 3;
+if let Some(c) = s.get_mut(&5) {
+    *c -= 1;
+    if *c == 0 { s.remove(&5); }
+}
+println!("{}", s.get(&5).copied().unwrap_or(0)); // 2
 \end{lstlisting}
 
 \section{Map structures}
@@ -254,51 +274,64 @@ where $n$ is the size of the array,
 the keys in a map can be of any data type and
 they do not have to be consecutive values.
 
-The C++ standard library contains two map
+The Rust standard library contains two map
 implementations that correspond to the set
 implementations: the structure
-\texttt{map} is based on a balanced
+\texttt{BTreeMap} is based on a balanced
 binary tree and accessing elements
 takes $O(\log n)$ time,
 while the structure
-\texttt{unordered\_map} uses hashing
+\texttt{HashMap} uses hashing
 and accessing elements takes $O(1)$ time on average.
 
 The following code creates a map
 where the keys are strings and the values are integers:
 
 \begin{lstlisting}
-map<string,int> m;
-m["monkey"] = 4;
-m["banana"] = 3;
-m["harpsichord"] = 9;
-cout << m["banana"] << "\n"; // 3
+use std::collections::BTreeMap;
+
+let mut m = BTreeMap::new();
+m.insert("monkey".to_string(), 4);
+m.insert("banana".to_string(), 3);
+m.insert("harpsichord".to_string(), 9);
+println!("{}", m["banana"]); // 3
 \end{lstlisting}
 
 If the value of a key is requested
 but the map does not contain it,
-the key is automatically added to the map with
-a default value.
+the key can be added to the map with
+a default value using \texttt{or\_insert}.
 For example, in the following code,
 the key ''aybabtu'' with value 0
 is added to the map.
 
 \begin{lstlisting}
-map<string,int> m;
-cout << m["aybabtu"] << "\n"; // 0
+use std::collections::BTreeMap;
+
+let mut m = BTreeMap::new();
+println!("{}", m.entry("aybabtu").or_insert(0)); // 0
 \end{lstlisting}
-The function \texttt{count} checks
+The method \texttt{contains\_key} checks
 if a key exists in a map:
 \begin{lstlisting}
-if (m.count("aybabtu")) {
+use std::collections::BTreeMap;
+
+let mut m = BTreeMap::new();
+m.insert("aybabtu".to_string(), 0);
+if m.contains_key("aybabtu") {
     // key exists
 }
 \end{lstlisting}
 The following code prints all the keys and values
 in a map:
 \begin{lstlisting}
-for (auto x : m) {
-    cout << x.first << " " << x.second << "\n";
+use std::collections::BTreeMap;
+
+let mut m = BTreeMap::new();
+m.insert("monkey".to_string(), 4);
+m.insert("banana".to_string(), 3);
+for (k, v) in &m {
+    println!("{} {}", k, v);
 }
 \end{lstlisting}
 
@@ -306,165 +339,139 @@ for (auto x : m) {
 
 \index{iterator}
 
-Many functions in the C++ standard library
-operate with iterators.
-An \key{iterator} is a variable that points
-to an element in a data structure.
+Many functions in the Rust standard library
+operate with slices and iterators.
+An \key{iterator} is a value that allows
+accessing elements in a data structure one by one.
 
-The often used iterators \texttt{begin}
-and \texttt{end} define a range that contains
+The methods \texttt{iter} and \texttt{iter\_mut}
+define a range that contains
 all elements in a data structure.
-The iterator \texttt{begin} points to
-the first element in the data structure,
-and the iterator \texttt{end} points to
-the position \emph{after} the last element.
-The situation looks as follows:
+The elements can be processed using a \texttt{for} loop.
 
-\begin{center}
-\begin{tabular}{llllllllll}
-\{ & 3, & 4, & 6, & 8, & 12, & 13, & 14, & 17 & \} \\
-& $\uparrow$ & & & & & & & & $\uparrow$ \\
-& \multicolumn{3}{l}{\texttt{s.begin()}} & & & & & & \texttt{s.end()} \\
-\end{tabular}
-\end{center}
-
-Note the asymmetry in the iterators:
-\texttt{s.begin()} points to an element in the data structure,
-while \texttt{s.end()} points outside the data structure.
-Thus, the range defined by the iterators is \emph{half-open}.
-
-\subsubsection{Working with ranges}
-
-Iterators are used in C++ standard library functions
-that are given a range of elements in a data structure.
-Usually, we want to process all elements in a
-data structure, so the iterators
-\texttt{begin} and \texttt{end} are given for the function.
-
-For example, the following code sorts a vector
-using the function \texttt{sort},
-then reverses the order of the elements using the function
-\texttt{reverse}, and finally shuffles the order of
-the elements using the function \texttt{random\_shuffle}.
-
-\index{sort@\texttt{sort}}
-\index{reverse@\texttt{reverse}}
-\index{random\_shuffle@\texttt{random\_shuffle}}
+The often used methods \texttt{sort}
+and \texttt{reverse} process all elements
+in a vector:
 
 \begin{lstlisting}
-sort(v.begin(), v.end());
-reverse(v.begin(), v.end());
-random_shuffle(v.begin(), v.end());
+let mut v = vec![3,1,4,1,5];
+v.sort();
+v.reverse();
 \end{lstlisting}
 
-These functions can also be used with an ordinary array.
-In this case, the functions are given pointers to the array
-instead of iterators:
+The same methods can be used with an ordinary array
+or a slice:
 
-\newpage
 \begin{lstlisting}
-sort(a, a+n);
-reverse(a, a+n);
-random_shuffle(a, a+n);
+let mut a = [3,1,4,1,5];
+a.sort();
+a.reverse();
 \end{lstlisting}
 
-\subsubsection{Set iterators}
+Shuffling the order of elements
+requires the \texttt{rand} crate:
 
-Iterators are often used to access
-elements of a set.
+\begin{lstlisting}
+use rand::seq::SliceRandom;
+use rand::thread_rng;
+
+let mut v = vec![3,1,4,1,5];
+let mut rng = thread_rng();
+v.shuffle(&mut rng);
+\end{lstlisting}
+
+\subsubsection{Working with sets}
+
+Elements of a set can be accessed
+using an iterator.
 The following code creates an iterator
-\texttt{it} that points to the smallest element in a set:
+that points to the smallest element in a set:
+
 \begin{lstlisting}
-set<int>::iterator it = s.begin();
+use std::collections::BTreeSet;
+
+let s = BTreeSet::from([3,4,6,8,12,13,14,17]);
+let first = s.iter().next();
 \end{lstlisting}
-A shorter way to write the code is as follows:
-\begin{lstlisting}
-auto it = s.begin();
-\end{lstlisting}
+
 The element to which an iterator points
-can be accessed using the \texttt{*} symbol.
+can be accessed directly.
 For example, the following code prints
 the first element in the set:
 
 \begin{lstlisting}
-auto it = s.begin();
-cout << *it << "\n";
+use std::collections::BTreeSet;
+
+let s = BTreeSet::from([3,4,6,8,12,13,14,17]);
+if let Some(x) = s.iter().next() {
+    println!("{}", x);
+}
 \end{lstlisting}
 
-Iterators can be moved using the operators
-\texttt{++} (forward) and \texttt{--} (backward),
-meaning that the iterator moves to the next
-or previous element in the set.
-
-The following code prints all the elements
+The elements of a set can be traversed
 in increasing order:
+
 \begin{lstlisting}
-for (auto it = s.begin(); it != s.end(); it++) {
-    cout << *it << "\n";
+use std::collections::BTreeSet;
+
+let s = BTreeSet::from([3,4,6,8,12,13,14,17]);
+for x in &s {
+    println!("{}", x);
 }
 \end{lstlisting}
 The following code prints the largest element in the set:
 \begin{lstlisting}
-auto it = s.end(); it--;
-cout << *it << "\n";
-\end{lstlisting}
+use std::collections::BTreeSet;
 
-The function $\texttt{find}(x)$ returns an iterator
-that points to an element whose value is $x$.
-However, if the set does not contain $x$,
-the iterator will be \texttt{end}.
-
-\begin{lstlisting}
-auto it = s.find(x);
-if (it == s.end()) {
-    // x is not found
+let s = BTreeSet::from([3,4,6,8,12,13,14,17]);
+if let Some(x) = s.iter().next_back() {
+    println!("{}", x);
 }
 \end{lstlisting}
 
-The function $\texttt{lower\_bound}(x)$ returns
-an iterator to the smallest element in the set
-whose value is \emph{at least} $x$, and
-the function $\texttt{upper\_bound}(x)$
-returns an iterator to the smallest element in the set
-whose value is \emph{larger than} $x$.
-In both functions, if such an element does not exist,
-the return value is \texttt{end}.
-These functions are not supported by the
-\texttt{unordered\_set} structure which
+The method \texttt{get} checks
+whether the set contains an element:
+
+\begin{lstlisting}
+use std::collections::BTreeSet;
+
+let s = BTreeSet::from([3,4,6,8,12,13,14,17]);
+if s.get(&8).is_some() {
+    // 8 is found
+}
+\end{lstlisting}
+
+Ordered sets also support range queries:
+the method \texttt{range} iterates over
+elements within a given range of values.
+These methods are not supported by the
+\texttt{HashSet} structure which
 does not maintain the order of the elements.
 
-\begin{samepage}
 For example, the following code finds the element
 nearest to $x$:
 
 \begin{lstlisting}
-auto it = s.lower_bound(x);
-if (it == s.begin()) {
-    cout << *it << "\n";
-} else if (it == s.end()) {
-    it--;
-    cout << *it << "\n";
-} else {
-    int a = *it; it--;
-    int b = *it;
-    if (x-b < a-x) cout << b << "\n";
-    else cout << a << "\n";
+use std::collections::BTreeSet;
+
+let s = BTreeSet::from([3,4,6,8,12,13,14,17]);
+let x = 10;
+if let Some(&a) = s.range(x..).next() {
+    println!("{}", a);
+} else if let Some(&b) = s.range(..=x).next_back() {
+    println!("{}", b);
 }
 \end{lstlisting}
 
 The code assumes that the set is not empty,
-and goes through all possible cases
-using an iterator \texttt{it}.
-First, the iterator points to the smallest
+and goes through all possible cases.
+First, the code looks for the smallest
 element whose value is at least $x$.
-If \texttt{it} equals \texttt{begin},
-the corresponding element is nearest to $x$.
-If \texttt{it} equals \texttt{end},
-the largest element in the set is nearest to $x$.
-If none of the previous cases hold,
-the element nearest to $x$ is either the
-element that corresponds to \texttt{it} or the previous element.
-\end{samepage}
+If there is no such element,
+the largest element whose value is at most $x$
+is nearest to $x$.
+Otherwise, the nearest element is either
+the found element or the previous element.
 
 \section{Other structures}
 
@@ -474,23 +481,27 @@ element that corresponds to \texttt{it} or the previous element.
 
 A \key{bitset} is an array
 whose each value is either 0 or 1.
+Rust does not have a bitset in the standard library,
+but for a small fixed number of bits an integer
+can be used as a bitmask.
 For example, the following code creates
 a bitset that contains 10 elements:
+
 \begin{lstlisting}
-bitset<10> s;
-s[1] = 1;
-s[3] = 1;
-s[4] = 1;
-s[7] = 1;
-cout << s[4] << "\n"; // 1
-cout << s[5] << "\n"; // 0
+let mut s: u16 = 0;
+s |= 1 << 1;
+s |= 1 << 3;
+s |= 1 << 4;
+s |= 1 << 7;
+println!("{}", (s >> 4) & 1); // 1
+println!("{}", (s >> 5) & 1); // 0
 \end{lstlisting}
 
 The benefit of using bitsets is that
 they require less memory than ordinary arrays,
 because each element in a bitset only
 uses one bit of memory.
-For example, 
+For example,
 if $n$ bits are stored in an \texttt{int} array,
 $32n$ bits of memory will be used,
 but a corresponding bitset only requires $n$ bits of memory.
@@ -501,26 +512,26 @@ optimize algorithms using bit sets.
 
 The following code shows another way to create the above bitset:
 \begin{lstlisting}
-bitset<10> s(string("0010011010")); // from right to left
-cout << s[4] << "\n"; // 1
-cout << s[5] << "\n"; // 0
+let mut s: u16 = 0b0010011010; // from right to left
+println!("{}", (s >> 4) & 1); // 1
+println!("{}", (s >> 5) & 1); // 0
 \end{lstlisting}
 
-The function \texttt{count} returns the number
+The method \texttt{count\_ones} returns the number
 of ones in the bitset:
 
 \begin{lstlisting}
-bitset<10> s(string("0010011010"));
-cout << s.count() << "\n"; // 4
+let s: u16 = 0b0010011010;
+println!("{}", s.count_ones()); // 4
 \end{lstlisting}
 
 The following code shows examples of using bit operations:
 \begin{lstlisting}
-bitset<10> a(string("0010110110"));
-bitset<10> b(string("1011011000"));
-cout << (a&b) << "\n"; // 0010010000
-cout << (a|b) << "\n"; // 1011111110
-cout << (a^b) << "\n"; // 1001101110
+let a: u16 = 0b0010110110;
+let b: u16 = 0b1011011000;
+println!("{:010b}", a & b); // 0010010000
+println!("{:010b}", a | b); // 1011111110
+println!("{:010b}", a ^ b); // 1001101110
 \end{lstlisting}
 
 \subsubsection{Deque}
@@ -530,15 +541,17 @@ cout << (a^b) << "\n"; // 1001101110
 A \key{deque} is a dynamic array
 whose size can be efficiently
 changed at both ends of the array.
-Like a vector, a deque provides the functions
+Like a vector, a deque provides the methods
 \texttt{push\_back} and \texttt{pop\_back}, but
-it also includes the functions
+it also includes the methods
 \texttt{push\_front} and \texttt{pop\_front}
 which are not available in a vector.
 
 A deque can be used as follows:
 \begin{lstlisting}
-deque<int> d;
+use std::collections::VecDeque;
+
+let mut d = VecDeque::new();
 d.push_back(5); // [5]
 d.push_back(2); // [5,2]
 d.push_front(3); // [3,5,2]
@@ -566,14 +579,15 @@ element of a stack.
 
 The following code shows how a stack can be used:
 \begin{lstlisting}
-stack<int> s;
+let mut s = Vec::new();
 s.push(3);
 s.push(2);
 s.push(5);
-cout << s.top(); // 5
+println!("{}", s.last().unwrap()); // 5
 s.pop();
-cout << s.top(); // 2
+println!("{}", s.last().unwrap()); // 2
 \end{lstlisting}
+
 \subsubsection{Queue}
 
 \index{queue}
@@ -587,13 +601,15 @@ and last element of a queue.
 
 The following code shows how a queue can be used:
 \begin{lstlisting}
-queue<int> q;
-q.push(3);
-q.push(2);
-q.push(5);
-cout << q.front(); // 3
-q.pop();
-cout << q.front(); // 2
+use std::collections::VecDeque;
+
+let mut q = VecDeque::new();
+q.push_back(3);
+q.push_back(2);
+q.push_back(5);
+println!("{}", q.front().unwrap()); // 3
+q.pop_front();
+println!("{}", q.front().unwrap()); // 2
 \end{lstlisting}
 
 \subsubsection{Priority queue}
@@ -619,24 +635,26 @@ a heap structure that is much simpler than a
 balanced binary tree used in an ordered set.
 
 \begin{samepage}
-By default, the elements in a C++
-priority queue are sorted in decreasing order,
+By default, the elements in a Rust
+priority queue (\texttt{BinaryHeap}) are sorted in decreasing order,
 and it is possible to find and remove the
 largest element in the queue.
 The following code illustrates this:
 
 \begin{lstlisting}
-priority_queue<int> q;
+use std::collections::BinaryHeap;
+
+let mut q = BinaryHeap::new();
 q.push(3);
 q.push(5);
 q.push(7);
 q.push(2);
-cout << q.top() << "\n"; // 7
+println!("{}", q.peek().unwrap()); // 7
 q.pop();
-cout << q.top() << "\n"; // 5
+println!("{}", q.peek().unwrap()); // 5
 q.pop();
 q.push(6);
-cout << q.top() << "\n"; // 6
+println!("{}", q.peek().unwrap()); // 6
 q.pop();
 \end{lstlisting}
 \end{samepage}
@@ -647,58 +665,29 @@ the smallest element,
 we can do it as follows:
 
 \begin{lstlisting}
-priority_queue<int,vector<int>,greater<int>> q;
+use std::collections::BinaryHeap;
+use std::cmp::Reverse;
+
+let mut q = BinaryHeap::new();
+q.push(Reverse(3));
+q.push(Reverse(5));
+q.push(Reverse(7));
+q.push(Reverse(2));
+println!("{}", q.peek().unwrap().0); // 2
+q.pop();
+println!("{}", q.peek().unwrap().0); // 3
+q.pop();
 \end{lstlisting}
 
 \subsubsection{Policy-based data structures}
 
-The \texttt{g++} compiler also supports
-some data structures that are not part
-of the C++ standard library.
-Such structures are called \emph{policy-based}
-data structures.
-To use these structures, the following lines
-must be added to the code:
-\begin{lstlisting}
-#include <ext/pb_ds/assoc_container.hpp>
-using namespace __gnu_pbds; 
-\end{lstlisting}
-After this, we can define a data structure \texttt{indexed\_set} that
-is like \texttt{set} but can be indexed like an array.
-The definition for \texttt{int} values is as follows:
-\begin{lstlisting}
-typedef tree<int,null_type,less<int>,rb_tree_tag,
-             tree_order_statistics_node_update> indexed_set; 
-\end{lstlisting}
-Now we can create a set as follows:
-\begin{lstlisting}
-indexed_set s;
-s.insert(2);
-s.insert(3);
-s.insert(7);
-s.insert(9);
-\end{lstlisting}
-The speciality of this set is that we have access to
-the indices that the elements would have in a sorted array.
-The function $\texttt{find\_by\_order}$ returns
-an iterator to the element at a given position:
-\begin{lstlisting}
-auto x = s.find_by_order(2);
-cout << *x << "\n"; // 7
-\end{lstlisting}
-And the function $\texttt{order\_of\_key}$
-returns the position of a given element:
-\begin{lstlisting}
-cout << s.order_of_key(7) << "\n"; // 2
-\end{lstlisting}
-If the element does not appear in the set,
-we get the position that the element would have
-in the set:
-\begin{lstlisting}
-cout << s.order_of_key(6) << "\n"; // 2
-cout << s.order_of_key(8) << "\n"; // 3
-\end{lstlisting}
-Both the functions work in logarithmic time.
+Rust does not include order-statistics
+data structures in the standard library.
+Such structures are available in external
+crates, for example the \texttt{indexed\_set} crate
+which provides a set that can be indexed like an array.
+Alternatively, a Fenwick tree (covered later in the book)
+can be used to support similar queries.
 
 \section{Comparison to sorting}
 
@@ -727,18 +716,18 @@ more efficient algorithms.
 
 We construct a set of the elements that appear in $A$,
 and after this, we iterate through the elements
-of $B$ and check for each elements if it
+of $B$ and check for each element if it
 also belongs to $A$.
 This is efficient because the elements of $A$
 are in a set.
-Using the \texttt{set} structure,
+Using the \texttt{BTreeSet} structure,
 the time complexity of the algorithm is $O(n \log n)$.
 
 \subsubsection{Algorithm 2}
 
 It is not necessary to maintain an ordered set,
-so instead of the \texttt{set} structure
-we can also use the \texttt{unordered\_set} structure.
+so instead of the \texttt{BTreeSet} structure
+we can also use the \texttt{HashSet} structure.
 This is an easy way to make the algorithm
 more efficient, because we only have to change
 the underlying data structure.

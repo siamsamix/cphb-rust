@@ -153,18 +153,20 @@ of the sum.
 
 Once a recursive function that solves the problem
 has been found,
-we can directly implement a solution in C++
+we can directly implement a solution in Rust
 (the constant \texttt{INF} denotes infinity):
 
 \begin{lstlisting}
-int solve(int x) {
-    if (x < 0) return INF;
-    if (x == 0) return 0;
-    int best = INF;
-    for (auto c : coins) {
-        best = min(best, solve(x-c)+1);
+const INF: i32 = 1_000_000_000;
+
+fn solve(x: i32, coins: &[i32]) -> i32 {
+    if x < 0 { return INF; }
+    if x == 0 { return 0; }
+    let mut best = INF;
+    for &c in coins {
+        best = best.min(solve(x - c, coins) + 1);
     }
-    return best;
+    best
 }
 \end{lstlisting}
 
@@ -189,8 +191,8 @@ the value can be directly retrieved from the array.
 
 In this problem, we use arrays
 \begin{lstlisting}
-bool ready[N];
-int value[N];
+let mut ready = [false; N];
+let mut value = [0; N];
 \end{lstlisting}
 
 where $\texttt{ready}[x]$ indicates
@@ -204,17 +206,17 @@ Now the function can be efficiently
 implemented as follows:
 
 \begin{lstlisting}
-int solve(int x) {
-    if (x < 0) return INF;
-    if (x == 0) return 0;
-    if (ready[x]) return value[x];
-    int best = INF;
-    for (auto c : coins) {
-        best = min(best, solve(x-c)+1);
+fn solve(x: i32, coins: &[i32], ready: &mut [bool], value: &mut [i32]) -> i32 {
+    if x < 0 { return INF; }
+    if x == 0 { return 0; }
+    if ready[x as usize] { return value[x as usize]; }
+    let mut best = INF;
+    for &c in coins {
+        best = best.min(solve(x - c, coins, ready, value) + 1);
     }
-    value[x] = best;
-    ready[x] = true;
-    return best;
+    value[x as usize] = best;
+    ready[x as usize] = true;
+    best
 }
 \end{lstlisting}
 
@@ -244,11 +246,12 @@ a loop that simply calculates all the values
 of $\texttt{solve}$ for parameters $0 \ldots n$:
 \begin{lstlisting}
 value[0] = 0;
-for (int x = 1; x <= n; x++) {
-    value[x] = INF;
-    for (auto c : coins) {
-        if (x-c >= 0) {
-            value[x] = min(value[x], value[x-c]+1);
+for x in 1..=n {
+    value[x as usize] = INF;
+    for &c in coins {
+        if x - c >= 0 {
+            value[x as usize] =
+                value[x as usize].min(value[(x - c) as usize] + 1);
         }
     }
 }
@@ -275,17 +278,17 @@ that indicates for
 each sum of money the first coin 
 in an optimal solution:
 \begin{lstlisting}
-int first[N];
+let mut first = [0; N];
 \end{lstlisting}
 Then, we can modify the algorithm as follows:
 \begin{lstlisting}
 value[0] = 0;
-for (int x = 1; x <= n; x++) {
-    value[x] = INF;
-    for (auto c : coins) {
-        if (x-c >= 0 && value[x-c]+1 < value[x]) {
-            value[x] = value[x-c]+1;
-            first[x] = c;
+for x in 1..=n {
+    value[x as usize] = INF;
+    for &c in coins {
+        if x - c >= 0 && value[(x - c) as usize] + 1 < value[x as usize] {
+            value[x as usize] = value[(x - c) as usize] + 1;
+            first[x as usize] = c;
         }
     }
 }
@@ -294,9 +297,9 @@ After this, the following code can be used to
 print the coins that appear in an optimal solution for
 the sum $n$:
 \begin{lstlisting}
-while (n > 0) {
-    cout << first[n] << "\n";
-    n -= first[n];
+while n > 0 {
+    println!("{}", first[n as usize]);
+    n -= first[n as usize];
 }
 \end{lstlisting}
 
@@ -356,10 +359,10 @@ for $0 \le x \le n$:
 
 \begin{lstlisting}
 count[0] = 1;
-for (int x = 1; x <= n; x++) {
-    for (auto c : coins) {
-        if (x-c >= 0) {
-            count[x] += count[x-c];
+for x in 1..=n {
+    for &c in coins {
+        if x - c >= 0 {
+            count[x as usize] += count[(x - c) as usize];
         }
     }
 }
@@ -373,11 +376,11 @@ This can be done by changing the code so that
 all calculations are done modulo $m$.
 In the above code, it suffices to add the line
 \begin{lstlisting}
-        count[x] %= m;
+        count[x as usize] %= m;
 \end{lstlisting}
 after the line
 \begin{lstlisting}
-        count[x] += count[x-c];
+        count[x as usize] += count[(x - c) as usize];
 \end{lstlisting}
 
 Now we have discussed all basic
@@ -507,11 +510,11 @@ of the function will be stored in an array
 $\texttt{length}$.
 
 \begin{lstlisting}
-for (int k = 0; k < n; k++) {
+for k in 0..n {
     length[k] = 1;
-    for (int i = 0; i < k; i++) {
-        if (array[i] < array[k]) {
-            length[k] = max(length[k],length[i]+1);
+    for i in 0..k {
+        if array[i] < array[k] {
+            length[k] = length[k].max(length[i] + 1);
         }
     }
 }
@@ -630,13 +633,15 @@ Since the function \texttt{sum} has two parameters,
 the dynamic programming array also has two dimensions.
 For example, we can use an array
 \begin{lstlisting}
-int sum[N][N];
+let mut sum = [[0; N]; N];
 \end{lstlisting}
 and calculate the sums as follows:
 \begin{lstlisting}
-for (int y = 1; y <= n; y++) {
-    for (int x = 1; x <= n; x++) {
-        sum[y][x] = max(sum[y][x-1],sum[y-1][x])+value[y][x];
+for y in 1..=n {
+    for x in 1..=n {
+        sum[y as usize][x as usize] =
+            sum[y as usize][x as usize - 1].max(sum[y as usize - 1][x as usize])
+            + value[y as usize][x as usize];
     }
 }
 \end{lstlisting}
@@ -727,10 +732,12 @@ dynamic programming solution
 corresponds to the recursive function:
 \begin{lstlisting}
 possible[0][0] = true;
-for (int k = 1; k <= n; k++) {
-    for (int x = 0; x <= W; x++) {
-        if (x-w[k] >= 0) possible[x][k] |= possible[x-w[k]][k-1];
-        possible[x][k] |= possible[x][k-1];
+for k in 1..=n {
+    for x in 0..=W {
+        if x - w[k] >= 0 {
+            possible[x as usize][k] |= possible[(x - w[k]) as usize][k - 1];
+        }
+        possible[x as usize][k] |= possible[x as usize][k - 1];
     }
 }
 \end{lstlisting}
@@ -742,9 +749,9 @@ The trick is to update the array from right to left for
 each new weight:
 \begin{lstlisting}
 possible[0] = true;
-for (int k = 1; k <= n; k++) {
-    for (int x = W; x >= 0; x--) {
-        if (possible[x]) possible[x+w[k]] = true;
+for k in 1..=n {
+    for x in (0..=W).rev() {
+        if possible[x as usize] { possible[(x + w[k]) as usize] = true; }
     }
 }
 \end{lstlisting}

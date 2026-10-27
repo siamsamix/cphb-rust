@@ -14,8 +14,8 @@ bit manipulation in algorithm programming.
 
 In programming, an $n$ bit integer is internally
 stored as a binary number that consists of $n$ bits.
-For example, the C++ type \texttt{int} is
-a 32-bit type, which means that every \texttt{int}
+For example, the \texttt{i32} type is
+a 32-bit type, which means that every \texttt{i32}
 number consists of 32 bits.
 
 Here is the bit representation of
@@ -35,8 +35,8 @@ which means that both negative and positive
 numbers can be represented.
 A signed variable of $n$ bits can contain any
 integer between $-2^{n-1}$ and $2^{n-1}-1$.
-For example, the \texttt{int} type in C++ is
-a signed type, so an \texttt{int} variable can contain any
+For example, the \texttt{i32} type in Rust is
+a signed type, so an \texttt{i32} variable can contain any
 integer between $-2^{31}$ and $2^{31}-1$.
 
 The first bit in a signed representation
@@ -56,7 +56,7 @@ In an unsigned representation, only nonnegative
 numbers can be used, but the upper bound for the values is larger.
 An unsigned variable of $n$ bits can contain any
 integer between $0$ and $2^n-1$.
-For example, in C++, an \texttt{unsigned int} variable
+For example, an \texttt{u32} variable
 can contain any integer between $0$ and $2^{32}-1$.
 
 There is a connection between the
@@ -66,10 +66,10 @@ For example, the following code shows that
 the signed number $x=-43$ equals the unsigned
 number $y=2^{32}-43$:
 \begin{lstlisting}
-int x = -43;
-unsigned int y = x;
-cout << x << "\n"; // -43
-cout << y << "\n"; // 4294967253
+let x = -43i32;
+let y = x as u32;
+println!("{}", x); // -43
+println!("{}", y); // 4294967253
 \end{lstlisting}
 
 If a number is larger than the upper bound
@@ -80,10 +80,10 @@ and in an unsigned representation,
 the next number after $2^n-1$ is $0$.
 For example, consider the following code:
 \begin{lstlisting}
-int x = 2147483647
-cout << x << "\n"; // 2147483647
-x++;
-cout << x << "\n"; // -2147483648
+let mut x = 2147483647i32;
+println!("{}", x); // 2147483647
+x = x.wrapping_add(1);
+println!("{}", x); // -2147483648
 \end{lstlisting}
 
 Initially, the value of $x$ is $2^{31}-1$.
@@ -171,7 +171,7 @@ The result of the not operation at the bit level
 depends on the length of the bit representation,
 because the operation inverts all bits.
 For example, if the numbers are 32-bit
-\texttt{int} numbers, the result is as follows:
+\texttt{i32} numbers, the result is as follows:
 
 \begin{center}
 \begin{tabular}{rrrr}
@@ -210,9 +210,9 @@ The following code prints the bit representation
 of an \texttt{int} number $x$:
 
 \begin{lstlisting}
-for (int i = 31; i >= 0; i--) {
-    if (x&(1<<i)) cout << "1";
-    else cout << "0";
+for i in (0..32).rev() {
+    if x & (1 << i) != 0 { print!("1"); }
+    else { print!("0"); }
 }
 \end{lstlisting}
 
@@ -238,8 +238,8 @@ a power of two exactly when $x$ \& $(x-1) = 0$.
 
 \subsubsection*{Additional functions}
 
-The g++ compiler provides the following
-functions for counting bits:
+The following functions are available
+for counting bits:
 
 \begin{itemize}
 \item
@@ -259,17 +259,16 @@ the parity (even or odd) of the number of ones
 
 The functions can be used as follows:
 \begin{lstlisting}
-int x = 5328; // 00000000000000000001010011010000
-cout << __builtin_clz(x) << "\n"; // 19
-cout << __builtin_ctz(x) << "\n"; // 4
-cout << __builtin_popcount(x) << "\n"; // 5
-cout << __builtin_parity(x) << "\n"; // 1
+let x = 5328; // 00000000000000000001010011010000
+println!("{}", x.leading_zeros()); // 19
+println!("{}", x.trailing_zeros()); // 4
+println!("{}", x.count_ones()); // 5
+println!("{}", x.count_ones() % 2); // 1
 \end{lstlisting}
 \end{samepage}
 
-While the above functions only support \texttt{int} numbers,
-there are also \texttt{long long} versions of
-the functions available with the suffix \texttt{ll}.
+These methods work for all integer types,
+including \texttt{i64}.
 
 \section{Representing sets}
 
@@ -297,18 +296,18 @@ a subset of $\{0,1,2,\ldots,31\}$.
 After this, the code adds the elements 1, 3, 4 and 8
 to the set and prints the size of the set.
 \begin{lstlisting}
-int x = 0;
-x |= (1<<1);
-x |= (1<<3);
-x |= (1<<4);
-x |= (1<<8);
-cout << __builtin_popcount(x) << "\n"; // 4
+let mut x = 0;
+x |= 1 << 1;
+x |= 1 << 3;
+x |= 1 << 4;
+x |= 1 << 8;
+println!("{}", x.count_ones()); // 4
 \end{lstlisting}
 Then, the following code prints all
 elements that belong to the set:
 \begin{lstlisting}
-for (int i = 0; i < 32; i++) {
-    if (x&(1<<i)) cout << i << " ";
+for i in 0..32 {
+    if x & (1 << i) != 0 { print!("{} ", i); }
 }
 // output: 1 3 4 8
 \end{lstlisting}
@@ -333,10 +332,10 @@ the sets $x=\{1,3,4,8\}$ and $y=\{3,6,8,9\}$,
 and then constructs the set $z = x \cup y = \{1,3,4,6,8,9\}$:
 
 \begin{lstlisting}
-int x = (1<<1)|(1<<3)|(1<<4)|(1<<8);
-int y = (1<<3)|(1<<6)|(1<<8)|(1<<9);
-int z = x|y;
-cout << __builtin_popcount(z) << "\n"; // 6
+let x = (1 << 1) | (1 << 3) | (1 << 4) | (1 << 8);
+let y = (1 << 3) | (1 << 6) | (1 << 8) | (1 << 9);
+let z = x | y;
+println!("{}", z.count_ones()); // 6
 \end{lstlisting}
 
 \subsubsection{Iterating through subsets}
@@ -345,15 +344,15 @@ The following code goes through
 the subsets of $\{0,1,\ldots,n-1\}$:
 
 \begin{lstlisting}
-for (int b = 0; b < (1<<n); b++) {
+for b in 0..(1 << n) {
     // process subset b
 }
 \end{lstlisting}
 The following code goes through
 the subsets with exactly $k$ elements:
 \begin{lstlisting}
-for (int b = 0; b < (1<<n); b++) {
-    if (__builtin_popcount(b) == k) {
+for b in 0..(1 << n) {
+    if b.count_ones() == k {
         // process subset b
     }
 }
@@ -361,10 +360,12 @@ for (int b = 0; b < (1<<n); b++) {
 The following code goes through the subsets
 of a set $x$:
 \begin{lstlisting}
-int b = 0;
-do {
+let mut b = 0;
+loop {
     // process subset b
-} while (b=(b-x)&x);
+    b = (b.wrapping_sub(x)) & x;
+    if b == 0 { break; }
+}
 \end{lstlisting}
 
 \section{Bit optimizations}
@@ -407,12 +408,12 @@ which yields an $O(n^2 k)$ time algorithm.
 The following function can be used to
 calculate distances:
 \begin{lstlisting}
-int hamming(string a, string b) {
-    int d = 0;
-    for (int i = 0; i < k; i++) {
-        if (a[i] != b[i]) d++;
+fn hamming(a: &str, b: &str) -> i32 {
+    let mut d = 0;
+    for i in 0..k {
+        if a.as_bytes()[i] != b.as_bytes()[i] { d += 1; }
     }
-    return d;
+    d
 }
 \end{lstlisting}
 
@@ -423,8 +424,8 @@ In particular, if $k \le 32$, we can just store
 the strings as \texttt{int} values and use the
 following function to calculate distances:
 \begin{lstlisting}
-int hamming(int a, int b) {
-    return __builtin_popcount(a^b);
+fn hamming(a: i32, b: i32) -> i32 {
+    (a ^ b).count_ones() as i32
 }
 \end{lstlisting}
 In the above function, the xor operation constructs
@@ -498,9 +499,9 @@ square in both rows in $O(n)$ time.
 The following code assumes that $\texttt{color}[y][x]$
 denotes the color in row $y$ and column $x$:
 \begin{lstlisting}
-int count = 0;
-for (int i = 0; i < n; i++) {
-    if (color[a][i] == 1 && color[b][i] == 1) count++;
+let mut count = 0;
+for i in 0..n {
+    if color[a][i] == 1 && color[b][i] == 1 { count += 1; }
 }
 \end{lstlisting}
 Then, those columns
@@ -516,9 +517,9 @@ using bit operations. In the following code,
 $\texttt{color}[y][k]$ represents
 a block of $N$ colors as bits.
 \begin{lstlisting}
-int count = 0;
-for (int i = 0; i <= n/N; i++) {
-    count += __builtin_popcount(color[a][i]&color[b][i]);
+let mut count = 0;
+for i in 0..=n/N {
+    count += (color[a][i] & color[b][i]).count_ones() as i32;
 }
 \end{lstlisting}
 The resulting algorithm works in $O(n^3/N)$ time.
@@ -527,8 +528,8 @@ We generated a random grid of size $2500 \times 2500$
 and compared the original and bit optimized implementation.
 While the original code took $29.6$ seconds,
 the bit optimized version only took $3.1$ seconds
-with $N=32$ (\texttt{int} numbers) and $1.7$ seconds
-with $N=64$ (\texttt{long long} numbers).
+with $N=32$ (\texttt{i32} numbers) and $1.7$ seconds
+with $N=64$ (\texttt{i64} numbers).
 
 \section{Dynamic programming}
 
@@ -616,7 +617,7 @@ The next step is to calculate the values of the function
 using dynamic programming.
 To store the function values, we declare an array
 \begin{lstlisting}
-int total[1<<K][N];
+let mut total = [[0; N]; 1 << K];
 \end{lstlisting}
 where $K$ and $N$ are suitably large constants.
 The first dimension of the array corresponds to a bit
@@ -624,19 +625,19 @@ representation of a subset.
 
 First, the cases where $d=0$ can be processed as follows:
 \begin{lstlisting}
-for (int x = 0; x < k; x++) {
-    total[1<<x][0] = price[x][0];
+for x in 0..k {
+    total[1 << x][0] = price[x][0];
 }
 \end{lstlisting}
 Then, the recurrence translates into the following code:
 \begin{lstlisting}
-for (int d = 1; d < n; d++) {
-    for (int s = 0; s < (1<<k); s++) {
+for d in 1..n {
+    for s in 0..(1 << k) {
         total[s][d] = total[s][d-1];
-        for (int x = 0; x < k; x++) {
-            if (s&(1<<x)) {
-                total[s][d] = min(total[s][d],
-                                    total[s^(1<<x)][d-1]+price[x][d]);
+        for x in 0..k {
+            if s & (1 << x) != 0 {
+                total[s][d] =
+                    total[s][d].min(total[s ^ (1 << x)][d-1] + price[x][d]);
             }
         }
     }
@@ -724,32 +725,32 @@ that initially only contains $p$.
 To implement dynamic programming,
 we declare an array
 \begin{lstlisting}
-pair<int,int> best[1<<N];
+let mut best = [(0, 0); 1 << N];
 \end{lstlisting}
 that contains for each subset $S$
 a pair $(\texttt{rides}(S),\texttt{last}(S))$.
 We set the value for an empty group as follows:
 \begin{lstlisting}
-best[0] = {1,0};
+best[0] = (1, 0);
 \end{lstlisting}
 Then, we can fill the array as follows:
 
 \begin{lstlisting}
-for (int s = 1; s < (1<<n); s++) {
+for s in 1..(1 << n) {
     // initial value: n+1 rides are needed
-    best[s] = {n+1,0};
-    for (int p = 0; p < n; p++) {
-        if (s&(1<<p)) {
-            auto option = best[s^(1<<p)];
-            if (option.second+weight[p] <= x) {
+    best[s] = (n + 1, 0);
+    for p in 0..n {
+        if s & (1 << p) != 0 {
+            let mut option = best[s ^ (1 << p)];
+            if option.1 + weight[p] <= x {
                 // add p to an existing ride
-                option.second += weight[p];
+                option.1 += weight[p];
             } else {
                 // reserve a new ride for p
-                option.first++;
-                option.second = weight[p];
+                option.0 += 1;
+                option.1 = weight[p];
             }
-            best[s] = min(best[s], option);
+            best[s] = best[s].min(option);
         }
     }
 }
@@ -825,20 +826,20 @@ or remove it from $S$.
 There is a particularly clever way to implement the
 calculation of sums. We can declare an array
 \begin{lstlisting}
-int sum[1<<N];
+let mut sum = [0; 1 << N];
 \end{lstlisting}
 that will contain the sum of each subset.
 The array is initialized as follows:
 \begin{lstlisting}
-for (int s = 0; s < (1<<n); s++) {
+for s in 0..(1 << n) {
     sum[s] = value[s];
 }
 \end{lstlisting}
 Then, we can fill the array as follows:
 \begin{lstlisting}
-for (int k = 0; k < n; k++) {
-    for (int s = 0; s < (1<<n); s++) {
-        if (s&(1<<k)) sum[s] += sum[s^(1<<k)];
+for k in 0..n {
+    for s in 0..(1 << n) {
+        if s & (1 << k) != 0 { sum[s] += sum[s ^ (1 << k)]; }
     }
 }
 \end{lstlisting}

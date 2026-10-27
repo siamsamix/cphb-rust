@@ -129,11 +129,11 @@ a depth-first search at a given node.
 The function assumes that the graph is
 stored as adjacency lists in an array
 \begin{lstlisting}
-vector<int> adj[N];
+let mut adj = vec![Vec::new(); N];
 \end{lstlisting}
 and also maintains an array
 \begin{lstlisting}
-bool visited[N];
+let mut visited = [false; N];
 \end{lstlisting}
 that keeps track of the visited nodes.
 Initially, each array value is \texttt{false},
@@ -141,12 +141,12 @@ and when the search arrives at node $s$,
 the value of \texttt{visited}[$s$] becomes \texttt{true}.
 The function can be implemented as follows:
 \begin{lstlisting}
-void dfs(int s) {
-    if (visited[s]) return;
+fn dfs(s: usize, adj: &[Vec<usize>], visited: &mut [bool]) {
+    if visited[s] { return; }
     visited[s] = true;
     // process node s
-    for (auto u: adj[s]) {
-        dfs(u);
+    for &u in &adj[s] {
+        dfs(u, adj, visited);
     }
 }
 \end{lstlisting}
@@ -311,9 +311,11 @@ The following code assumes that the graph is stored
 as adjacency lists and maintains the following
 data structures:
 \begin{lstlisting}
-queue<int> q;
-bool visited[N];
-int distance[N];
+use std::collections::VecDeque;
+
+let mut q = VecDeque::new();
+let mut visited = [false; N];
+let mut distance = [0; N];
 \end{lstlisting}
 
 The queue \texttt{q}
@@ -332,15 +334,14 @@ starting at node $x$:
 \begin{lstlisting}
 visited[x] = true;
 distance[x] = 0;
-q.push(x);
-while (!q.empty()) {
-    int s = q.front(); q.pop();
+q.push_back(x);
+while let Some(s) = q.pop_front() {
     // process node s
-    for (auto u : adj[s]) {
-        if (visited[u]) continue;
+    for &u in &adj[s] {
+        if visited[u] { continue; }
         visited[u] = true;
-        distance[u] = distance[s]+1;
-        q.push(u);
+        distance[u] = distance[s] + 1;
+        q.push_back(u);
     }
 }
 \end{lstlisting}

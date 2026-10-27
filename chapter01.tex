@@ -75,57 +75,44 @@ are set so that
 using a specific programming language
 is not an unfair advantage.
 
-All example programs in this book are written in C++,
+All example programs in this book are written in Rust,
 and the standard library's
 data structures and algorithms are often used.
-The programs follow the C++11 standard,
+The programs follow the Rust 2021 edition,
 which can be used in most contests nowadays.
-If you cannot program in C++ yet,
+If you cannot program in Rust yet,
 now is a good time to start learning.
 
-\subsubsection{C++ code template}
+\subsubsection{Rust code template}
 
-A typical C++ code template for competitive programming
+A typical Rust code template for competitive programming
 looks like this:
 
 \begin{lstlisting}
-#include <bits/stdc++.h>
+use std::io;
 
-using namespace std;
-
-int main() {
+fn main() {
     // solution comes here
 }
 \end{lstlisting}
 
-The \texttt{\#include} line at the beginning
-of the code is a feature of the \texttt{g++} compiler
-that allows us to include the entire standard library.
-Thus, it is not needed to separately include
-libraries such as \texttt{iostream},
-\texttt{vector} and \texttt{algorithm},
-but rather they are available automatically.
-
-The \texttt{using} line declares
-that the classes and functions
-of the standard library can be used directly
-in the code.
-Without the \texttt{using} line we would have
-to write, for example, \texttt{std::cout},
-but now it suffices to write \texttt{cout}.
+The \texttt{use} line at the beginning
+of the code imports Rust's standard input/output
+library, which provides tools for reading input
+and writing output. Thus, it is not needed to separately
+import additional modules for basic input and output,
+but they are available through the standard library.
 
 The code can be compiled using the following command:
 
 \begin{lstlisting}
-g++ -std=c++11 -O2 -Wall test.cpp -o test
+rustc -O test.rs -o test
 \end{lstlisting}
 
 This command produces a binary file \texttt{test}
-from the source code \texttt{test.cpp}.
-The compiler follows the C++11 standard
-(\texttt{-std=c++11}),
-optimizes the code (\texttt{-O2})
-and shows warnings about possible errors (\texttt{-Wall}).
+from the source code \texttt{test.rs}.
+The compiler optimizes the code
+(\texttt{-O}).
 
 \section{Input and output}
 
@@ -133,21 +120,26 @@ and shows warnings about possible errors (\texttt{-Wall}).
 
 In most contests, standard streams are used for
 reading input and writing output.
-In C++, the standard streams are
-\texttt{cin} for input and \texttt{cout} for output.
-In addition, the C functions
-\texttt{scanf} and \texttt{printf} can be used.
+In Rust, input is read from standard input using
+\texttt{io::stdin()} and output is written with
+the \texttt{println!} macro.
 
 The input for the program usually consists of
 numbers and strings that are separated with
 spaces and newlines.
-They can be read from the \texttt{cin} stream
-as follows:
+They can be read as follows:
 
 \begin{lstlisting}
-int a, b;
-string x;
-cin >> a >> b >> x;
+use std::io;
+
+fn main() {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).unwrap();
+    let mut tokens = input.split_whitespace();
+    let a: i32 = tokens.next().unwrap().parse().unwrap();
+    let b: i32 = tokens.next().unwrap().parse().unwrap();
+    let x: String = tokens.next().unwrap().to_string();
+}
 \end{lstlisting}
 
 This kind of code always works,
@@ -162,74 +154,83 @@ both of the following inputs:
 123    456
 monkey
 \end{lstlisting}
-The \texttt{cout} stream is used for output
+Output is written using the \texttt{println!} macro
 as follows:
 \begin{lstlisting}
-int a = 123, b = 456;
-string x = "monkey";
-cout << a << " " << b << " " << x << "\n";
+fn main() {
+    let a = 123;
+    let b = 456;
+    let x = "monkey";
+    println!("{} {} {}", a, b, x);
+}
 \end{lstlisting}
 
 Input and output is sometimes
 a bottleneck in the program.
-The following lines at the beginning of the code
-make input and output more efficient:
+Reading all input at once and splitting it into
+tokens makes input and output efficient:
 
 \begin{lstlisting}
-ios::sync_with_stdio(0);
-cin.tie(0);
+use std::io::{self, Read};
+
+fn main() {
+    let mut input = String::new();
+    io::stdin().read_to_string(&mut input).unwrap();
+    let mut tokens = input.split_whitespace();
+    // read tokens here
+}
 \end{lstlisting}
 
-Note that the newline \texttt{"\textbackslash n"}
-works faster than \texttt{endl},
-because \texttt{endl} always causes
-a flush operation.
-
-The C functions \texttt{scanf}
-and \texttt{printf} are an alternative
-to the C++ standard streams.
-They are usually a bit faster,
-but they are also more difficult to use.
-The following code reads two integers from the input:
-\begin{lstlisting}
-int a, b;
-scanf("%d %d", &a, &b);
-\end{lstlisting}
-The following code prints two integers:
-\begin{lstlisting}
-int a = 123, b = 456;
-printf("%d %d\n", a, b);
-\end{lstlisting}
+Note that the \texttt{println!} macro
+works efficiently for output.
 
 Sometimes the program should read a whole line
 from the input, possibly containing spaces.
 This can be accomplished by using the
-\texttt{getline} function:
+\texttt{read_line} method:
 
 \begin{lstlisting}
-string s;
-getline(cin, s);
+use std::io;
+
+fn main() {
+    let mut s = String::new();
+    io::stdin().read_line(&mut s).unwrap();
+}
 \end{lstlisting}
 
 If the amount of data is unknown, the following
 loop is useful:
 \begin{lstlisting}
-while (cin >> x) {
-    // code
+use std::io::{self, BufRead};
+
+fn main() {
+    let stdin = io::stdin();
+    for line in stdin.lock().lines() {
+        let x = line.unwrap();
+        // code
+    }
 }
 \end{lstlisting}
-This loop reads elements from the input
+This loop reads lines from the input
 one after another, until there is no
 more data available in the input.
 
 In some contest systems, files are used for
 input and output.
-An easy solution for this is to write
-the code as usual using standard streams,
-but add the following lines to the beginning of the code:
+An easy solution for this is to read the input
+from a file and write the output to a file:
+
 \begin{lstlisting}
-freopen("input.txt", "r", stdin);
-freopen("output.txt", "w", stdout);
+use std::fs::File;
+use std::io::{self, BufRead, BufWriter, Write};
+
+fn main() {
+    let input = File::open("input.txt").unwrap();
+    let output = File::create("output.txt").unwrap();
+    let reader = io::BufReader::new(input);
+    let mut writer = io::BufWriter::new(output);
+    // read from reader and write to writer
+}
 \end{lstlisting}
 After this, the program reads the input from the file
 ''input.txt'' and writes the output to the file
@@ -241,53 +242,57 @@ After this, the program reads the input from the file
 
 \subsubsection{Integers}
 
-The most used integer type in competitive programming
-is \texttt{int}, which is a 32-bit type with
+The most used integer types in competitive programming
+are \texttt{i32}, which is a 32-bit type with
 a value range of $-2^{31} \ldots 2^{31}-1$
-or about $-2 \cdot 10^9 \ldots 2 \cdot 10^9$.
-If the type \texttt{int} is not enough,
-the 64-bit type \texttt{long long} can be used.
-It has a value range of $-2^{63} \ldots 2^{63}-1$
+or about $-2 \cdot 10^9 \ldots 2 \cdot 10^9$,
+and \texttt{i64}, which is a 64-bit type with
+a value range of $-2^{63} \ldots 2^{63}-1$
 or about $-9 \cdot 10^{18} \ldots 9 \cdot 10^{18}$.
+If \texttt{i32} is not enough,
+the \texttt{i64} type can be used.
 
-The following code defines a
-\texttt{long long} variable:
+The following code defines an
+\texttt{i64} variable:
 \begin{lstlisting}
-long long x = 123456789123456789LL;
+let x: i64 = 123456789123456789;
 \end{lstlisting}
-The suffix \texttt{LL} means that the
-type of the number is \texttt{long long}.
 
-A common mistake when using the type \texttt{long long}
-is that the type \texttt{int} is still used somewhere
+A common mistake when using the type \texttt{i64}
+is that the type \texttt{i32} is still used somewhere
 in the code.
 For example, the following code contains
 a subtle error:
 
 \begin{lstlisting}
-int a = 123456789;
-long long b = a*a;
-cout << b << "\n"; // -1757895751
+let a: i32 = 123456789;
+let b: i64 = (a as i64) * (a as i64);
+println!("{}", b); // correct: 15241578750190521
 \end{lstlisting}
 
-Even though the variable \texttt{b} is of type \texttt{long long},
-both numbers in the expression \texttt{a*a}
-are of type \texttt{int} and the result is
-also of type \texttt{int}.
-Because of this, the variable \texttt{b} will
-contain a wrong result.
-The problem can be solved by changing the type
-of \texttt{a} to \texttt{long long} or
-by changing the expression to \texttt{(long long)a*a}.
+Even though the variable \texttt{b} is of type \texttt{i64},
+both numbers in the expression \texttt{(a as i64) * (a as i64)}
+are converted to \texttt{i64} before the multiplication,
+so the result is correct.
+The problem would occur if the multiplication were
+done as \texttt{a * a} with \texttt{a} of type \texttt{i32},
+because the result would overflow
+and be truncated to 32 bits.
+The problem can be solved by making sure at least one
+operand is of type \texttt{i64}, for example
+by converting \texttt{a} to \texttt{i64} before
+the multiplication.
 
 Usually contest problems are set so that the
-type \texttt{long long} is enough.
+type \texttt{i64} is enough.
 Still, it is good to know that
-the \texttt{g++} compiler also provides
-a 128-bit type \texttt{\_\_int128\_t}
+Rust also provides
+a 128-bit type \texttt{i128}
 with a value range of
-$-2^{127} \ldots 2^{127}-1$ or about $-10^{38} \ldots 10^{38}$.
-However, this type is not available in all contest systems.
+$-2^{127} \ldots 2^{127}-1$ or about
+$-10^{38} \ldots 10^{38}$.
+However, this type may not be available
+on all target platforms.
 
 \subsubsection{Modular arithmetic}
 
@@ -307,7 +312,7 @@ the remainder when the answer is divided by $m$
 The idea is that even if the actual answer
 is very large,
 it suffices to use the types
-\texttt{int} and \texttt{long long}.
+\texttt{i32} and \texttt{i64}.
 
 An important property of the remainder is that
 in addition, subtraction and multiplication,
@@ -327,16 +332,18 @@ and the numbers will never become too large.
 For example, the following code calculates $n!$,
 the factorial of $n$, modulo $m$:
 \begin{lstlisting}
-long long x = 1;
-for (int i = 2; i <= n; i++) {
-    x = (x*i)%m;
+let mut x: i64 = 1;
+let n: i64 = 10;
+let m: i64 = 1000000007;
+for i in 2..=n {
+    x = (x * i) % m;
 }
-cout << x%m << "\n";
+println!("{}", x % m);
 \end{lstlisting}
 
 Usually we want the remainder to always
 be between $0\ldots m-1$.
-However, in C++ and other languages,
+However, in Rust and other languages,
 the remainder of a negative number
 is either zero or negative.
 An easy way to make sure there
@@ -344,8 +351,8 @@ are no negative remainders is to first calculate
 the remainder as usual and then add $m$
 if the result is negative:
 \begin{lstlisting}
-x = x%m;
-if (x < 0) x += m;
+x = x % m;
+if x < 0 { x += m; }
 \end{lstlisting}
 However, this is only needed when there
 are subtractions in the code and the
@@ -357,23 +364,24 @@ remainder may become negative.
 
 The usual floating point types in
 competitive programming are
-the 64-bit \texttt{double}
-and, as an extension in the \texttt{g++} compiler,
-the 80-bit \texttt{long double}.
-In most cases, \texttt{double} is enough,
-but \texttt{long double} is more accurate.
+the 64-bit \texttt{f64}
+and, when more precision is needed,
+the 128-bit \texttt{f128}.
+In most cases, \texttt{f64} is enough,
+but \texttt{f128} is more accurate.
 
 The required precision of the answer
 is usually given in the problem statement.
 An easy way to output the answer is to use
-the \texttt{printf} function
+the \texttt{println!} macro
 and give the number of decimal places
 in the formatting string.
 For example, the following code prints
 the value of $x$ with 9 decimal places:
 
 \begin{lstlisting}
-printf("%.9f\n", x);
+let x = 1.23456789012345;
+println!("{:.9}", x);
 \end{lstlisting}
 
 A difficulty when using floating point numbers
@@ -384,8 +392,8 @@ For example, the result of the following code
 is surprising:
 
 \begin{lstlisting}
-double x = 0.3*3+0.1;
-printf("%.20f\n", x); // 0.99999999999999988898
+let x = 0.3 * 3.0 + 0.1;
+println!("{:.20}", x); // 0.99999999999999988898
 \end{lstlisting}
 
 Due to a rounding error,
@@ -405,7 +413,7 @@ In practice, the numbers can be compared
 as follows ($\varepsilon=10^{-9}$):
 
 \begin{lstlisting}
-if (abs(a-b) < 1e-9) {
+if (a - b).abs() < 1e-9 {
     // a and b are equal
 }
 \end{lstlisting}
@@ -413,7 +421,7 @@ if (abs(a-b) < 1e-9) {
 Note that while floating point numbers are inaccurate,
 integers up to a certain limit can still be
 represented accurately.
-For example, using \texttt{double},
+For example, using \texttt{f64},
 it is possible to accurately represent all
 integers whose absolute value is at most $2^{53}$.
 
@@ -426,117 +434,101 @@ Because of this, competitive programmers often define
 shorter names for datatypes and other parts of code.
 
 \subsubsection{Type names}
-\index{tuppdef@\texttt{typedef}}
-Using the command \texttt{typedef}
+\index{tuppdef@\texttt{type} alias}
+Using a \texttt{type} alias
 it is possible to give a shorter name
 to a datatype.
-For example, the name \texttt{long long} is long,
-so we can define a shorter name \texttt{ll}:
+For example, the name \texttt{i64} is long,
+so we can define a shorter name \texttt{Ll}:
 \begin{lstlisting}
-typedef long long ll;
+type Ll = i64;
 \end{lstlisting}
 After this, the code
 \begin{lstlisting}
-long long a = 123456789;
-long long b = 987654321;
-cout << a*b << "\n";
+type Ll = i64;
+
+fn main() {
+    let a: Ll = 123456789;
+    let b: Ll = 987654321;
+    println!("{}", a * b);
+}
 \end{lstlisting}
 can be shortened as follows:
 \begin{lstlisting}
-ll a = 123456789;
-ll b = 987654321;
-cout << a*b << "\n";
+type Ll = i64;
+
+fn main() {
+    let a: Ll = 123456789;
+    let b: Ll = 987654321;
+    println!("{}", a * b);
+}
 \end{lstlisting}
 
-The command \texttt{typedef}
+The \texttt{type} alias
 can also be used with more complex types.
 For example, the following code gives
-the name \texttt{vi} for a vector of integers
-and the name \texttt{pi} for a pair
+the name \texttt{Vi} for a vector of integers
+and the name \texttt{Pi} for a pair
 that contains two integers.
 \begin{lstlisting}
-typedef vector<int> vi;
-typedef pair<int,int> pi;
+type Vi = Vec<i32>;
+type Pi = (i32, i32);
 \end{lstlisting}
 
-\subsubsection{Macros}
+\subsubsection{Macros and functions}
 \index{macro}
-Another way to shorten code is to define
-\key{macros}.
-A macro means that certain strings in
-the code will be changed before the compilation.
-In C++, macros are defined using the
-\texttt{\#define} keyword.
+Rust does not have a preprocessor like C++,
+so there are no \texttt{\#define} macros.
+Instead, shortcuts are created with
+functions or Rust's \texttt{macro\_rule!} macros.
+For example, instead of defining macros for
+accessing the fields of a pair,
+Rust uses \texttt{.0} and \texttt{.1}:
 
-For example, we can define the following macros:
+For example, we can write the following code:
 \begin{lstlisting}
-#define F first
-#define S second
-#define PB push_back
-#define MP make_pair
-\end{lstlisting}
-After this, the code
-\begin{lstlisting}
-v.push_back(make_pair(y1,x1));
-v.push_back(make_pair(y2,x2));
-int d = v[i].first+v[i].second;
-\end{lstlisting}
-can be shortened as follows:
-\begin{lstlisting}
-v.PB(MP(y1,x1));
-v.PB(MP(y2,x2));
-int d = v[i].F+v[i].S;
-\end{lstlisting}
-
-A macro can also have parameters
-which makes it possible to shorten loops and other
-structures.
-For example, we can define the following macro:
-\begin{lstlisting}
-#define REP(i,a,b) for (int i = a; i <= b; i++)
-\end{lstlisting}
-After this, the code
-\begin{lstlisting}
-for (int i = 1; i <= n; i++) {
-    search(i);
-}
-\end{lstlisting}
-can be shortened as follows:
-\begin{lstlisting}
-REP(i,1,n) {
-    search(i);
+fn main() {
+    let p: (i32, i32) = (7, 4);
+    println!("{} {}", p.0, p.1);
 }
 \end{lstlisting}
 
-Sometimes macros cause bugs that may be difficult
-to detect. For example, consider the following macro
-that calculates the square of a number:
+A loop that repeats for a range of values
+is written directly with a Rust range:
 \begin{lstlisting}
-#define SQ(a) a*a
+fn main() {
+    let n = 5;
+    for i in 1..=n {
+        // code
+    }
+}
 \end{lstlisting}
-This macro \emph{does not} always work as expected.
-For example, the code
-\begin{lstlisting}
-cout << SQ(3+3) << "\n";
-\end{lstlisting}
-corresponds to the code
-\begin{lstlisting}
-cout << 3+3*3+3 << "\n"; // 15
-\end{lstlisting}
+This loop runs with \texttt{i} from 1 to \texttt{n}
+inclusive.
 
-A better version of the macro is as follows:
+Sometimes bugs may be difficult
+to detect. For example, consider the following
+approach for calculating the square of a number
+by inlining the expression:
 \begin{lstlisting}
-#define SQ(a) (a)*(a)
+fn main() {
+    let a = 3 + 3;
+    println!("{}", a * a); // 36
+}
 \end{lstlisting}
-Now the code
+This works as expected.
+A reusable way to do the same is a function:
 \begin{lstlisting}
-cout << SQ(3+3) << "\n";
-\end{lstlisting}
-corresponds to the code
-\begin{lstlisting}
-cout << (3+3)*(3+3) << "\n"; // 36
-\end{lstlisting}
+fn sq(a: i32) -> i32 {
+    a * a
+}
 
+fn main() {
+    println!("{}", sq(3 + 3)); // 36
+}
+\end{lstlisting}
+Using a function avoids precedence pitfalls
+that can occur with textual macros.
 
 \section{Mathematics}
 

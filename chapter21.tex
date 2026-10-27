@@ -162,12 +162,14 @@ all numbers between $2$ and $\lfloor \sqrt n \rfloor$,
 and if none of them divides $n$, then $n$ is prime.
 
 \begin{lstlisting}
-bool prime(int n) {
-    if (n < 2) return false;
-    for (int x = 2; x*x <= n; x++) {
-        if (n%x == 0) return false;
+fn prime(n: i64) -> bool {
+    if n < 2 { return false; }
+    let mut x = 2;
+    while x * x <= n {
+        if n % x == 0 { return false; }
+        x += 1;
     }
-    return true;
+    true
 }
 \end{lstlisting}
 
@@ -182,16 +184,18 @@ has no factors between $2$ and $\lfloor \sqrt n \rfloor$.
 If $n>1$, it is prime and the last factor.
 
 \begin{lstlisting}
-vector<int> factors(int n) {
-    vector<int> f;
-    for (int x = 2; x*x <= n; x++) {
-        while (n%x == 0) {
-            f.push_back(x);
+fn factors(mut n: i64) -> Vec<i64> {
+    let mut f = Vec::new();
+    let mut x = 2;
+    while x * x <= n {
+        while n % x == 0 {
+            f.push(x);
             n /= x;
         }
+        x += 1;
     }
-    if (n > 1) f.push_back(n);
-    return f;
+    if n > 1 { f.push(n); }
+    f
 }
 \end{lstlisting}
 
@@ -283,10 +287,12 @@ The code assumes that each element of
 \texttt{sieve} is initially zero.
 
 \begin{lstlisting}
-for (int x = 2; x <= n; x++) {
-    if (sieve[x]) continue;
-    for (int u = 2*x; u <= n; u += x) {
+for x in 2..=n {
+    if sieve[x] != 0 { continue; }
+    let mut u = 2 * x;
+    while u <= n {
         sieve[u] = x;
+        u += x;
     }
 }
 \end{lstlisting}
@@ -344,9 +350,9 @@ For example,
 
 The algorithm can be implemented as follows:
 \begin{lstlisting}
-int gcd(int a, int b) {
-    if (b == 0) return a;
-    return gcd(b, a%b);
+fn gcd(a: i64, b: i64) -> i64 {
+    if b == 0 { return a; }
+    gcd(b, a % b)
 }
 \end{lstlisting}
 
@@ -430,12 +436,12 @@ The following function calculates the value of
 $x^n \bmod m$:
 
 \begin{lstlisting}
-int modpow(int x, int n, int m) {
-    if (n == 0) return 1%m;
-    long long u = modpow(x,n/2,m);
-    u = (u*u)%m;
-    if (n%2 == 1) u = (u*x)%m;
-    return u;
+fn modpow(mut x: i64, mut n: i64, m: i64) -> i64 {
+    if n == 0 { return 1 % m; }
+    let mut u = modpow(x, n / 2, m);
+    u = (u * u) % m;
+    if n % 2 == 1 { u = (u * x) % m; }
+    u
 }
 \end{lstlisting}
 
@@ -516,17 +522,17 @@ where $k$ is the number of bits of the data type.
 A usual consequence of this is that a number wraps around
 if it becomes too large.
 
-For example, in C++, numbers of type \texttt{unsigned int}
+For example, numbers of type \texttt{u32}
 are represented modulo $2^{32}$.
-The following code declares an \texttt{unsigned int}
+The following code declares a \texttt{u32}
 variable whose value is $123456789$.
 After this, the value will be multiplied by itself,
 and the result is
 $123456789^2 \bmod 2^{32} = 2537071545$.
 
 \begin{lstlisting}
-unsigned int x = 123456789;
-cout << x*x << "\n"; // 2537071545
+let mut x = 123456789u32;
+println!("{}", x.wrapping_mul(x)); // 2537071545
 \end{lstlisting}
 
 \section{Solving equations}

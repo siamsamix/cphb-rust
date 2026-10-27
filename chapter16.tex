@@ -672,9 +672,9 @@ walks two steps forward.
 The process continues until
 the pointers meet each other:
 \begin{lstlisting}
-a = succ(x);
-b = succ(succ(x));
-while (a != b) {
+let mut a = succ(x);
+let mut b = succ(succ(x));
+while a != b {
     a = succ(a);
     b = succ(succ(b));
 }
@@ -688,21 +688,21 @@ can be found by moving the pointer $a$ to node $x$
 and advancing the pointers
 step by step until they meet again.
 \begin{lstlisting}
-a = x;
-while (a != b) {
+let mut a = x;
+while a != b {
     a = succ(a);
     b = succ(b);
 }
-first = a;
+let first = a;
 \end{lstlisting}
 
 After this, the length of the cycle
 can be calculated as follows:
 \begin{lstlisting}
-b = succ(a);
-length = 1;
-while (a != b) {
+let mut b = succ(a);
+let mut length = 1;
+while a != b {
     b = succ(b);
-    length++;
+    length += 1;
 }
 \end{lstlisting}

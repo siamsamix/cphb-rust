@@ -1,0 +1,374 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{Preface}{ix}{chapter*.2}%
+\contentsline {part}{I\hspace {1em}Basic techniques}{1}{part.1}%
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Programming languages}{3}{section.1.1}%
+\contentsline {subsubsection}{Rust code template}{4}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Input and output}{4}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Working with numbers}{6}{section.1.3}%
+\contentsline {subsubsection}{Integers}{6}{section.1.3}%
+\contentsline {subsubsection}{Modular arithmetic}{7}{lstnumber.-12.3}%
+\contentsline {subsubsection}{Floating point numbers}{8}{lstnumber.-14.2}%
+\contentsline {section}{\numberline {1.4}Shortening code}{8}{section.1.4}%
+\contentsline {subsubsection}{Type names}{9}{section.1.4}%
+\contentsline {subsubsection}{Macros and functions}{9}{lstnumber.-21.2}%
+\contentsline {section}{\numberline {1.5}Mathematics}{10}{section.1.5}%
+\contentsline {subsubsection}{Sum formulas}{10}{section.1.5}%
+\contentsline {subsubsection}{Set theory}{12}{section.1.5}%
+\contentsline {subsubsection}{Logic}{13}{section.1.5}%
+\contentsline {subsubsection}{Functions}{14}{section.1.5}%
+\contentsline {subsubsection}{Logarithms}{15}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Contests and resources}{16}{section.1.6}%
+\contentsline {subsubsection}{IOI}{16}{section.1.6}%
+\contentsline {subsubsection}{ICPC}{16}{section.1.6}%
+\contentsline {subsubsection}{Online contests}{17}{section.1.6}%
+\contentsline {subsubsection}{Books}{17}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Time complexity}{19}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Calculation rules}{19}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Complexity classes}{22}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Estimating efficiency}{23}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Maximum subarray sum}{24}{section.2.4}%
+\contentsline {subsubsection}{Algorithm 1}{24}{section.2.4}%
+\contentsline {subsubsection}{Algorithm 2}{25}{lstnumber.-36.11}%
+\contentsline {subsubsection}{Algorithm 3}{25}{lstnumber.-37.9}%
+\contentsline {subsubsection}{Efficiency comparison}{26}{lstnumber.-38.7}%
+\contentsline {chapter}{\numberline {3}Sorting}{27}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Sorting theory}{27}{section.3.1}%
+\contentsline {subsubsection}{$O(n^2)$ algorithms}{27}{section.3.1}%
+\contentsline {subsubsection}{Inversions}{28}{lstnumber.-39.7}%
+\contentsline {subsubsection}{$O(n \log n)$ algorithms}{29}{lstnumber.-39.7}%
+\contentsline {subsubsection}{Sorting lower bound}{30}{Item.7}%
+\contentsline {subsubsection}{Counting sort}{31}{Item.7}%
+\contentsline {section}{\numberline {3.2}Sorting in Rust}{32}{section.3.2}%
+\contentsline {subsubsection}{Comparison operators}{33}{lstnumber.-43.2}%
+\contentsline {subsubsection}{User-defined structs}{33}{lstnumber.-45.2}%
+\contentsline {subsubsection}{Comparison functions}{34}{lstnumber.-46.5}%
+\contentsline {section}{\numberline {3.3}Binary search}{34}{section.3.3}%
+\contentsline {subsubsection}{Method 1}{34}{lstnumber.-49.5}%
+\contentsline {subsubsection}{Method 2}{35}{lstnumber.-50.10}%
+\contentsline {subsubsection}{Rust functions}{36}{lstnumber.-51.9}%
+\contentsline {subsubsection}{Finding the smallest solution}{36}{lstnumber.-54.4}%
+\contentsline {subsubsection}{Finding the maximum value}{37}{lstnumber.-55.7}%
+\contentsline {chapter}{\numberline {4}Data structures}{39}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Dynamic arrays}{39}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Set structures}{41}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Map structures}{43}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Iterators and ranges}{44}{section.4.4}%
+\contentsline {subsubsection}{Working with sets}{44}{lstnumber.-78.6}%
+\contentsline {section}{\numberline {4.5}Other structures}{46}{section.4.5}%
+\contentsline {subsubsection}{Bitset}{46}{section.4.5}%
+\contentsline {subsubsection}{Deque}{47}{lstnumber.-88.5}%
+\contentsline {subsubsection}{Stack}{47}{lstnumber.-89.8}%
+\contentsline {subsubsection}{Queue}{47}{lstnumber.-90.7}%
+\contentsline {subsubsection}{Priority queue}{48}{lstnumber.-91.9}%
+\contentsline {subsubsection}{Policy-based data structures}{49}{lstnumber.-93.12}%
+\contentsline {section}{\numberline {4.6}Comparison to sorting}{49}{section.4.6}%
+\contentsline {subsubsection}{Algorithm 1}{49}{section.4.6}%
+\contentsline {subsubsection}{Algorithm 2}{49}{section.4.6}%
+\contentsline {subsubsection}{Algorithm 3}{50}{section.4.6}%
+\contentsline {subsubsection}{Efficiency comparison}{50}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Complete search}{51}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Generating subsets}{51}{section.5.1}%
+\contentsline {subsubsection}{Method 1}{51}{section.5.1}%
+\contentsline {subsubsection}{Method 2}{52}{lstnumber.-94.10}%
+\contentsline {section}{\numberline {5.2}Generating permutations}{53}{section.5.2}%
+\contentsline {subsubsection}{Method 1}{53}{section.5.2}%
+\contentsline {subsubsection}{Method 2}{53}{lstnumber.-97.14}%
+\contentsline {section}{\numberline {5.3}Backtracking}{54}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Pruning the search}{56}{section.5.4}%
+\contentsline {subsubsection}{Basic algorithm}{57}{section.5.4}%
+\contentsline {subsubsection}{Optimization 1}{57}{section.5.4}%
+\contentsline {subsubsection}{Optimization 2}{57}{section.5.4}%
+\contentsline {subsubsection}{Optimization 3}{58}{section.5.4}%
+\contentsline {subsubsection}{Optimization 4}{58}{section.5.4}%
+\contentsline {section}{\numberline {5.5}Meet in the middle}{59}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Greedy algorithms}{61}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Coin problem}{61}{section.6.1}%
+\contentsline {subsubsection}{Greedy algorithm}{61}{section.6.1}%
+\contentsline {subsubsection}{General case}{62}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Scheduling}{62}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Tasks and deadlines}{64}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Minimizing sums}{65}{section.6.4}%
+\contentsline {subsubsection}{Case $c=1$}{65}{section.6.4}%
+\contentsline {subsubsection}{Case $c=2$}{66}{section.6.4}%
+\contentsline {section}{\numberline {6.5}Data compression}{66}{section.6.5}%
+\contentsline {subsubsection}{Huffman coding}{67}{section.6.5}%
+\contentsline {chapter}{\numberline {7}Dynamic programming}{69}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Coin problem}{69}{section.7.1}%
+\contentsline {subsubsection}{Recursive formulation}{70}{section.7.1}%
+\contentsline {subsubsection}{Using memoization}{71}{lstnumber.-100.11}%
+\contentsline {subsubsection}{Constructing a solution}{72}{lstnumber.-103.10}%
+\contentsline {subsubsection}{Counting the number of solutions}{73}{lstnumber.-106.4}%
+\contentsline {section}{\numberline {7.2}Longest increasing subsequence}{74}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Paths in a grid}{75}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Knapsack problems}{77}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Edit distance}{78}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Counting tilings}{80}{section.7.6}%
+\contentsline {chapter}{\numberline {8}Amortized analysis}{83}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Two pointers method}{83}{section.8.1}%
+\contentsline {subsubsection}{Subarray sum}{83}{section.8.1}%
+\contentsline {subsubsection}{2SUM problem}{84}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Nearest smaller elements}{85}{section.8.2}%
+\contentsline {section}{\numberline {8.3}Sliding window minimum}{87}{section.8.3}%
+\contentsline {chapter}{\numberline {9}Range queries}{89}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Static array queries}{89}{section.9.1}%
+\contentsline {subsubsection}{Sum queries}{90}{section.9.1}%
+\contentsline {subsubsection}{Minimum queries}{91}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Binary indexed tree}{92}{section.9.2}%
+\contentsline {subsubsection}{Structure}{93}{section.9.2}%
+\contentsline {subsubsection}{Implementation}{94}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Segment tree}{95}{section.9.3}%
+\contentsline {subsubsection}{Structure}{95}{section.9.3}%
+\contentsline {subsubsection}{Implementation}{97}{section.9.3}%
+\contentsline {subsubsection}{Other queries}{98}{lstnumber.-119.8}%
+\contentsline {section}{\numberline {9.4}Additional techniques}{99}{section.9.4}%
+\contentsline {subsubsection}{Index compression}{99}{section.9.4}%
+\contentsline {subsubsection}{Range updates}{100}{section.9.4}%
+\contentsline {chapter}{\numberline {10}Bit manipulation}{101}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Bit representation}{101}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Bit operations}{102}{section.10.2}%
+\contentsline {subsubsection}{And operation}{102}{section.10.2}%
+\contentsline {subsubsection}{Or operation}{102}{section.10.2}%
+\contentsline {subsubsection}{Xor operation}{103}{section.10.2}%
+\contentsline {subsubsection}{Not operation}{103}{section.10.2}%
+\contentsline {subsubsection}{Bit shifts}{103}{section.10.2}%
+\contentsline {subsubsection}{Applications}{103}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Representing sets}{104}{section.10.3}%
+\contentsline {subsubsection}{Set implementation}{105}{section.10.3}%
+\contentsline {subsubsection}{Set operations}{105}{lstnumber.-125.4}%
+\contentsline {subsubsection}{Iterating through subsets}{105}{lstnumber.-126.4}%
+\contentsline {section}{\numberline {10.4}Bit optimizations}{106}{section.10.4}%
+\contentsline {subsubsection}{Hamming distances}{106}{section.10.4}%
+\contentsline {subsubsection}{Counting subgrids}{107}{lstnumber.-131.3}%
+\contentsline {section}{\numberline {10.5}Dynamic programming}{108}{section.10.5}%
+\contentsline {subsubsection}{Optimal selection}{108}{section.10.5}%
+\contentsline {subsubsection}{From permutations to subsets}{109}{lstnumber.-136.11}%
+\contentsline {subsubsection}{Counting subsets}{111}{lstnumber.-139.18}%
+\contentsline {part}{II\hspace {1em}Graph algorithms}{113}{part.2}%
+\contentsline {chapter}{\numberline {11}Basics of graphs}{115}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Graph terminology}{115}{section.11.1}%
+\contentsline {subsubsection}{Connectivity}{116}{section.11.1}%
+\contentsline {subsubsection}{Edge directions}{116}{section.11.1}%
+\contentsline {subsubsection}{Edge weights}{117}{section.11.1}%
+\contentsline {subsubsection}{Neighbors and degrees}{117}{section.11.1}%
+\contentsline {subsubsection}{Colorings}{118}{section.11.1}%
+\contentsline {subsubsection}{Simplicity}{118}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Graph representation}{119}{section.11.2}%
+\contentsline {subsubsection}{Adjacency list representation}{119}{section.11.2}%
+\contentsline {subsubsection}{Adjacency matrix representation}{120}{lstnumber.-147.3}%
+\contentsline {subsubsection}{Edge list representation}{121}{lstnumber.-148.1}%
+\contentsline {chapter}{\numberline {12}Graph traversal}{123}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Depth-first search}{123}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Breadth-first search}{125}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Applications}{127}{section.12.3}%
+\contentsline {subsubsection}{Connectivity check}{127}{section.12.3}%
+\contentsline {subsubsection}{Finding cycles}{128}{section.12.3}%
+\contentsline {subsubsection}{Bipartiteness check}{128}{section.12.3}%
+\contentsline {chapter}{\numberline {13}Shortest paths}{131}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Bellman–Ford algorithm}{131}{section.13.1}%
+\contentsline {subsubsection}{Example}{131}{section.13.1}%
+\contentsline {subsubsection}{Implementation}{133}{section.13.1}%
+\contentsline {subsubsection}{Negative cycles}{133}{lstnumber.-158.7}%
+\contentsline {subsubsection}{SPFA algorithm}{134}{lstnumber.-158.7}%
+\contentsline {section}{\numberline {13.2}Dijkstra's algorithm}{134}{section.13.2}%
+\contentsline {subsubsection}{Example}{135}{section.13.2}%
+\contentsline {subsubsection}{Negative edges}{136}{section.13.2}%
+\contentsline {subsubsection}{Implementation}{136}{section.13.2}%
+\contentsline {section}{\numberline {13.3}Floyd–Warshall algorithm}{137}{section.13.3}%
+\contentsline {subsubsection}{Example}{137}{section.13.3}%
+\contentsline {subsubsection}{Implementation}{139}{section.13.3}%
+\contentsline {chapter}{\numberline {14}Tree algorithms}{141}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Tree traversal}{142}{section.14.1}%
+\contentsline {subsubsection}{Dynamic programming}{142}{lstnumber.-163.1}%
+\contentsline {section}{\numberline {14.2}Diameter}{143}{section.14.2}%
+\contentsline {subsubsection}{Algorithm 1}{143}{section.14.2}%
+\contentsline {subsubsection}{Algorithm 2}{144}{section.14.2}%
+\contentsline {section}{\numberline {14.3}All longest paths}{145}{section.14.3}%
+\contentsline {section}{\numberline {14.4}Binary trees}{147}{section.14.4}%
+\contentsline {chapter}{\numberline {15}Spanning trees}{149}{chapter.15}%
+\contentsline {section}{\numberline {15.1}Kruskal's algorithm}{150}{section.15.1}%
+\contentsline {subsubsection}{Example}{150}{section.15.1}%
+\contentsline {subsubsection}{Why does this work?}{152}{section.15.1}%
+\contentsline {subsubsection}{Implementation}{153}{section.15.1}%
+\contentsline {section}{\numberline {15.2}Union-find structure}{153}{section.15.2}%
+\contentsline {subsubsection}{Structure}{153}{section.15.2}%
+\contentsline {subsubsection}{Implementation}{154}{section.15.2}%
+\contentsline {section}{\numberline {15.3}Prim's algorithm}{155}{section.15.3}%
+\contentsline {subsubsection}{Example}{156}{section.15.3}%
+\contentsline {subsubsection}{Implementation}{157}{section.15.3}%
+\contentsline {chapter}{\numberline {16}Directed graphs}{159}{chapter.16}%
+\contentsline {section}{\numberline {16.1}Topological sorting}{159}{section.16.1}%
+\contentsline {subsubsection}{Algorithm}{160}{section.16.1}%
+\contentsline {subsubsection}{Example 1}{160}{section.16.1}%
+\contentsline {subsubsection}{Example 2}{161}{section.16.1}%
+\contentsline {section}{\numberline {16.2}Dynamic programming}{161}{section.16.2}%
+\contentsline {subsubsection}{Counting the number of paths}{162}{section.16.2}%
+\contentsline {subsubsection}{Extending Dijkstra's algorithm}{163}{section.16.2}%
+\contentsline {subsubsection}{Representing problems as graphs}{163}{section.16.2}%
+\contentsline {section}{\numberline {16.3}Successor paths}{164}{section.16.3}%
+\contentsline {section}{\numberline {16.4}Cycle detection}{165}{section.16.4}%
+\contentsline {subsubsection}{Floyd's algorithm}{166}{section.16.4}%
+\contentsline {chapter}{\numberline {17}Strong connectivity}{169}{chapter.17}%
+\contentsline {section}{\numberline {17.1}Kosaraju's algorithm}{170}{section.17.1}%
+\contentsline {subsubsection}{Search 1}{170}{section.17.1}%
+\contentsline {subsubsection}{Search 2}{171}{section.17.1}%
+\contentsline {section}{\numberline {17.2}2SAT problem}{172}{section.17.2}%
+\contentsline {chapter}{\numberline {18}Tree queries}{175}{chapter.18}%
+\contentsline {section}{\numberline {18.1}Finding ancestors}{175}{section.18.1}%
+\contentsline {section}{\numberline {18.2}Subtrees and paths}{176}{section.18.2}%
+\contentsline {subsubsection}{Subtree queries}{177}{section.18.2}%
+\contentsline {subsubsection}{Path queries}{178}{section.18.2}%
+\contentsline {section}{\numberline {18.3}Lowest common ancestor}{179}{section.18.3}%
+\contentsline {subsubsection}{Method 1}{179}{section.18.3}%
+\contentsline {subsubsection}{Method 2}{180}{section.18.3}%
+\contentsline {subsubsection}{Distances of nodes}{181}{section.18.3}%
+\contentsline {section}{\numberline {18.4}Offline algorithms}{182}{section.18.4}%
+\contentsline {subsubsection}{Merging data structures}{182}{section.18.4}%
+\contentsline {subsubsection}{Lowest common ancestors}{184}{lstnumber.-173.1}%
+\contentsline {chapter}{\numberline {19}Paths and circuits}{187}{chapter.19}%
+\contentsline {section}{\numberline {19.1}Eulerian paths}{187}{section.19.1}%
+\contentsline {subsubsection}{Existence}{188}{section.19.1}%
+\contentsline {subsubsection}{Hierholzer's algorithm}{189}{section.19.1}%
+\contentsline {subsubsection}{Example}{190}{section.19.1}%
+\contentsline {section}{\numberline {19.2}Hamiltonian paths}{191}{section.19.2}%
+\contentsline {subsubsection}{Existence}{192}{section.19.2}%
+\contentsline {subsubsection}{Construction}{192}{section.19.2}%
+\contentsline {section}{\numberline {19.3}De Bruijn sequences}{192}{section.19.3}%
+\contentsline {section}{\numberline {19.4}Knight's tours}{193}{section.19.4}%
+\contentsline {subsubsection}{Warnsdorf's rule}{194}{section.19.4}%
+\contentsline {chapter}{\numberline {20}Flows and cuts}{195}{chapter.20}%
+\contentsline {subsubsection}{Maximum flow}{195}{chapter.20}%
+\contentsline {subsubsection}{Minimum cut}{196}{chapter.20}%
+\contentsline {section}{\numberline {20.1}Ford–Fulkerson algorithm}{196}{section.20.1}%
+\contentsline {subsubsection}{Algorithm description}{197}{section.20.1}%
+\contentsline {subsubsection}{Finding paths}{198}{section.20.1}%
+\contentsline {subsubsection}{Minimum cuts}{199}{section.20.1}%
+\contentsline {section}{\numberline {20.2}Disjoint paths}{200}{section.20.2}%
+\contentsline {subsubsection}{Edge-disjoint paths}{200}{section.20.2}%
+\contentsline {subsubsection}{Node-disjoint paths}{200}{section.20.2}%
+\contentsline {section}{\numberline {20.3}Maximum matchings}{201}{section.20.3}%
+\contentsline {subsubsection}{Finding maximum matchings}{202}{section.20.3}%
+\contentsline {subsubsection}{Hall's theorem}{203}{section.20.3}%
+\contentsline {subsubsection}{Kőnig's theorem}{204}{section.20.3}%
+\contentsline {section}{\numberline {20.4}Path covers}{205}{section.20.4}%
+\contentsline {subsubsection}{Node-disjoint path cover}{205}{section.20.4}%
+\contentsline {subsubsection}{General path cover}{206}{section.20.4}%
+\contentsline {subsubsection}{Dilworth's theorem}{207}{section.20.4}%
+\contentsline {part}{III\hspace {1em}Advanced topics}{209}{part.3}%
+\contentsline {chapter}{\numberline {21}Number theory}{211}{chapter.21}%
+\contentsline {section}{\numberline {21.1}Primes and factors}{211}{section.21.1}%
+\contentsline {subsubsection}{Number of primes}{212}{section.21.1}%
+\contentsline {subsubsection}{Density of primes}{212}{section.21.1}%
+\contentsline {subsubsection}{Conjectures}{213}{section.21.1}%
+\contentsline {subsubsection}{Basic algorithms}{213}{section.21.1}%
+\contentsline {subsubsection}{Sieve of Eratosthenes}{214}{lstnumber.-175.13}%
+\contentsline {subsubsection}{Euclid's algorithm}{215}{lstnumber.-176.8}%
+\contentsline {subsubsection}{Euler's totient function}{215}{lstnumber.-177.4}%
+\contentsline {section}{\numberline {21.2}Modular arithmetic}{216}{section.21.2}%
+\contentsline {subsubsection}{Modular exponentiation}{216}{section.21.2}%
+\contentsline {subsubsection}{Fermat's theorem and Euler's theorem}{216}{lstnumber.-178.7}%
+\contentsline {subsubsection}{Modular inverse}{217}{lstnumber.-178.7}%
+\contentsline {subsubsection}{Computer arithmetic}{217}{lstnumber.-178.7}%
+\contentsline {section}{\numberline {21.3}Solving equations}{218}{section.21.3}%
+\contentsline {subsubsection}{Chinese remainder theorem}{219}{section.21.3}%
+\contentsline {section}{\numberline {21.4}Other results}{219}{section.21.4}%
+\contentsline {subsubsection}{Lagrange's theorem}{219}{section.21.4}%
+\contentsline {subsubsection}{Zeckendorf's theorem}{220}{section.21.4}%
+\contentsline {subsubsection}{Pythagorean triples}{220}{section.21.4}%
+\contentsline {subsubsection}{Wilson's theorem}{220}{section.21.4}%
+\contentsline {chapter}{\numberline {22}Combinatorics}{221}{chapter.22}%
+\contentsline {section}{\numberline {22.1}Binomial coefficients}{222}{section.22.1}%
+\contentsline {subsubsection}{Formula 1}{222}{section.22.1}%
+\contentsline {subsubsection}{Formula 2}{222}{section.22.1}%
+\contentsline {subsubsection}{Properties}{223}{section.22.1}%
+\contentsline {subsubsection}{Boxes and balls}{223}{section.22.1}%
+\contentsline {subsubsection}{Multinomial coefficients}{224}{section.22.1}%
+\contentsline {section}{\numberline {22.2}Catalan numbers}{225}{section.22.2}%
+\contentsline {subsubsection}{Parenthesis expressions}{225}{section.22.2}%
+\contentsline {subsubsection}{Formula 1}{225}{section.22.2}%
+\contentsline {subsubsection}{Formula 2}{226}{section.22.2}%
+\contentsline {subsubsection}{Counting trees}{226}{section.22.2}%
+\contentsline {section}{\numberline {22.3}Inclusion-exclusion}{227}{section.22.3}%
+\contentsline {subsubsection}{Derangements}{228}{section.22.3}%
+\contentsline {section}{\numberline {22.4}Burnside's lemma}{228}{section.22.4}%
+\contentsline {section}{\numberline {22.5}Cayley's formula}{229}{section.22.5}%
+\contentsline {subsubsection}{Prüfer code}{230}{section.22.5}%
+\contentsline {chapter}{\numberline {23}Matrices}{233}{chapter.23}%
+\contentsline {section}{\numberline {23.1}Operations}{233}{section.23.1}%
+\contentsline {subsubsection}{Matrix multiplication}{234}{section.23.1}%
+\contentsline {subsubsection}{Matrix power}{235}{section.23.1}%
+\contentsline {subsubsection}{Determinant}{235}{section.23.1}%
+\contentsline {section}{\numberline {23.2}Linear recurrences}{236}{section.23.2}%
+\contentsline {subsubsection}{Fibonacci numbers}{236}{section.23.2}%
+\contentsline {subsubsection}{General case}{237}{section.23.2}%
+\contentsline {section}{\numberline {23.3}Graphs and matrices}{238}{section.23.3}%
+\contentsline {subsubsection}{Counting paths}{238}{section.23.3}%
+\contentsline {subsubsection}{Shortest paths}{238}{section.23.3}%
+\contentsline {subsubsection}{Kirchhoff's theorem}{240}{section.23.3}%
+\contentsline {chapter}{\numberline {24}Probability}{241}{chapter.24}%
+\contentsline {section}{\numberline {24.1}Calculation}{241}{section.24.1}%
+\contentsline {section}{\numberline {24.2}Events}{242}{section.24.2}%
+\contentsline {subsubsection}{Complement}{243}{section.24.2}%
+\contentsline {subsubsection}{Union}{243}{section.24.2}%
+\contentsline {subsubsection}{Conditional probability}{243}{section.24.2}%
+\contentsline {subsubsection}{Intersection}{244}{section.24.2}%
+\contentsline {section}{\numberline {24.3}Random variables}{244}{section.24.3}%
+\contentsline {subsubsection}{Expected value}{245}{section.24.3}%
+\contentsline {subsubsection}{Distributions}{245}{section.24.3}%
+\contentsline {section}{\numberline {24.4}Markov chains}{246}{section.24.4}%
+\contentsline {section}{\numberline {24.5}Randomized algorithms}{247}{section.24.5}%
+\contentsline {subsubsection}{Order statistics}{248}{section.24.5}%
+\contentsline {subsubsection}{Verifying matrix multiplication}{248}{section.24.5}%
+\contentsline {subsubsection}{Graph coloring}{249}{section.24.5}%
+\contentsline {chapter}{\numberline {25}Game theory}{251}{chapter.25}%
+\contentsline {section}{\numberline {25.1}Game states}{251}{section.25.1}%
+\contentsline {subsubsection}{Winning and losing states}{251}{section.25.1}%
+\contentsline {subsubsection}{State graph}{252}{section.25.1}%
+\contentsline {section}{\numberline {25.2}Nim game}{253}{section.25.2}%
+\contentsline {subsubsection}{Analysis}{253}{section.25.2}%
+\contentsline {subsubsection}{Misère game}{254}{section.25.2}%
+\contentsline {section}{\numberline {25.3}Sprague–Grundy theorem}{254}{section.25.3}%
+\contentsline {subsubsection}{Grundy numbers}{255}{section.25.3}%
+\contentsline {subsubsection}{Subgames}{256}{section.25.3}%
+\contentsline {subsubsection}{Grundy's game}{257}{section.25.3}%
+\contentsline {chapter}{\numberline {26}String algorithms}{259}{chapter.26}%
+\contentsline {section}{\numberline {26.1}String terminology}{259}{section.26.1}%
+\contentsline {section}{\numberline {26.2}Trie structure}{260}{section.26.2}%
+\contentsline {section}{\numberline {26.3}String hashing}{261}{section.26.3}%
+\contentsline {section}{\numberline {26.4}Z-algorithm}{264}{section.26.4}%
+\contentsline {subsubsection}{Using the Z-array}{266}{section.26.4}%
+\contentsline {subsubsection}{Implementation}{267}{section.26.4}%
+\contentsline {chapter}{\numberline {27}Square root algorithms}{269}{chapter.27}%
+\contentsline {section}{\numberline {27.1}Combining algorithms}{270}{section.27.1}%
+\contentsline {subsubsection}{Case processing}{270}{section.27.1}%
+\contentsline {subsubsection}{Batch processing}{271}{section.27.1}%
+\contentsline {section}{\numberline {27.2}Integer partitions}{272}{section.27.2}%
+\contentsline {subsubsection}{Knapsack}{272}{section.27.2}%
+\contentsline {subsubsection}{String construction}{273}{section.27.2}%
+\contentsline {section}{\numberline {27.3}Mo's algorithm}{273}{section.27.3}%
+\contentsline {chapter}{\numberline {28}Segment trees revisited}{275}{chapter.28}%
+\contentsline {section}{\numberline {28.1}Lazy propagation}{276}{section.28.1}%
+\contentsline {subsubsection}{Lazy segment trees}{277}{section.28.1}%
+\contentsline {subsubsection}{Polynomial updates}{278}{section.28.1}%
+\contentsline {section}{\numberline {28.2}Dynamic trees}{279}{section.28.2}%
+\contentsline {subsubsection}{Sparse segment trees}{280}{lstnumber.-186.4}%
+\contentsline {subsubsection}{Persistent segment trees}{280}{lstnumber.-186.4}%
+\contentsline {section}{\numberline {28.3}Data structures}{281}{section.28.3}%
+\contentsline {section}{\numberline {28.4}Two-dimensionality}{282}{section.28.4}%
+\contentsline {chapter}{\numberline {29}Geometry}{285}{chapter.29}%
+\contentsline {section}{\numberline {29.1}Complex numbers}{286}{section.29.1}%
+\contentsline {section}{\numberline {29.2}Points and lines}{288}{section.29.2}%
+\contentsline {subsubsection}{Point location}{288}{lstnumber.-192.3}%
+\contentsline {subsubsection}{Line segment intersection}{289}{lstnumber.-192.3}%
+\contentsline {subsubsection}{Point distance from a line}{290}{lstnumber.-192.3}%
+\contentsline {subsubsection}{Point inside a polygon}{290}{lstnumber.-192.3}%
+\contentsline {section}{\numberline {29.3}Polygon area}{291}{section.29.3}%
+\contentsline {subsubsection}{Pick's theorem}{292}{section.29.3}%
+\contentsline {section}{\numberline {29.4}Distance functions}{293}{section.29.4}%
+\contentsline {subsubsection}{Rotating coordinates}{294}{section.29.4}%
+\contentsline {chapter}{\numberline {30}Sweep line algorithms}{297}{chapter.30}%
+\contentsline {section}{\numberline {30.1}Intersection points}{298}{section.30.1}%
+\contentsline {section}{\numberline {30.2}Closest pair problem}{299}{section.30.2}%
+\contentsline {section}{\numberline {30.3}Convex hull problem}{300}{section.30.3}%
+\contentsline {chapter}{Bibliography}{303}{section*.3}%
+\contentsline {chapter}{Index}{309}{chapter*.5}%

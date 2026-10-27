@@ -113,10 +113,10 @@ a depth-first search at an arbitrary node.
 The following recursive function can be used:
 
 \begin{lstlisting}
-void dfs(int s, int e) {
+fn dfs(s: usize, e: usize) {
     // process node s
-    for (auto u : adj[s]) {
-        if (u != e) dfs(u, s);
+    for &u in &adj[s] {
+        if u != e { dfs(u, s); }
     }
 }
 \end{lstlisting}
@@ -156,10 +156,10 @@ so we can calculate the number of nodes
 recursively using the following code:
 
 \begin{lstlisting}
-void dfs(int s, int e) {
+fn dfs(s: usize, e: usize) {
     count[s] = 1;
-    for (auto u : adj[s]) {
-        if (u == e) continue;
+    for &u in &adj[s] {
+        if u == e { continue; }
         dfs(u, s);
         count[s] += count[u];
     }

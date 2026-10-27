@@ -480,7 +480,7 @@ efficiently implemented using them.
 A convenient way to store the adjacency lists is to declare
 an array of vectors as follows:
 \begin{lstlisting}
-vector<int> adj[N];
+let mut adj = vec![Vec::new(); N];
 \end{lstlisting}
 
 The constant $N$ is chosen so that all
@@ -503,11 +503,11 @@ For example, the graph
 \end{center}
 can be stored as follows:
 \begin{lstlisting}
-adj[1].push_back(2);
-adj[2].push_back(3);
-adj[2].push_back(4);
-adj[3].push_back(4);
-adj[4].push_back(1);
+adj[1].push(2);
+adj[2].push(3);
+adj[2].push(4);
+adj[3].push(4);
+adj[4].push(1);
 \end{lstlisting}
 
 If the graph is undirected, it can be stored in a similar way,
@@ -517,7 +517,7 @@ For a weighted graph, the structure can be extended
 as follows:
 
 \begin{lstlisting}
-vector<pair<int,int>> adj[N];
+let mut adj = vec![Vec::<(i32, i32)>::new(); N];
 \end{lstlisting}
 
 In this case, the adjacency list of node $a$
@@ -541,11 +541,11 @@ with weight $w$. For example, the graph
 \end{center}
 can be stored as follows:
 \begin{lstlisting}
-adj[1].push_back({2,5});
-adj[2].push_back({3,7});
-adj[2].push_back({4,6});
-adj[3].push_back({4,5});
-adj[4].push_back({1,2});
+adj[1].push((2, 5));
+adj[2].push((3, 7));
+adj[2].push((4, 6));
+adj[3].push((4, 5));
+adj[4].push((1, 2));
 \end{lstlisting}
 
 The benefit of using adjacency lists is that
@@ -555,7 +555,7 @@ For example, the following loop goes through all nodes
 to which we can move from node $s$:
 
 \begin{lstlisting}
-for (auto u : adj[s]) {
+for &u in &adj[s] {
     // process node u
 }
 \end{lstlisting}
@@ -570,7 +570,7 @@ We can efficiently check from an adjacency matrix
 if there is an edge between two nodes.
 The matrix can be stored as an array
 \begin{lstlisting}
-int adj[N][N];
+let mut adj = [[0; N]; N];
 \end{lstlisting}
 where each value $\texttt{adj}[a][b]$ indicates
 whether the graph contains an edge from
@@ -696,7 +696,7 @@ at a given node.
 
 The edge list can be stored in a vector
 \begin{lstlisting}
-vector<pair<int,int>> edges;
+let mut edges = Vec::<(i32, i32)>::new();
 \end{lstlisting}
 where each pair $(a,b)$ denotes that
 there is an edge from node $a$ to node $b$.
@@ -718,18 +718,18 @@ Thus, the graph
 \end{center}
 can be represented as follows:
 \begin{lstlisting}
-edges.push_back({1,2});
-edges.push_back({2,3});
-edges.push_back({2,4});
-edges.push_back({3,4});
-edges.push_back({4,1});
+edges.push((1, 2));
+edges.push((2, 3));
+edges.push((2, 4));
+edges.push((3, 4));
+edges.push((4, 1));
 \end{lstlisting}
 
 \noindent
 If the graph is weighted, the structure can
 be extended as follows:
 \begin{lstlisting}
-vector<tuple<int,int,int>> edges;
+let mut edges = Vec::<(i32, i32, i32)>::new();
 \end{lstlisting}
 Each element in this list is of the
 form $(a,b,w)$, which means that there
@@ -755,10 +755,10 @@ can be represented as follows\footnote{In some older compilers, the function
 \texttt{make\_tuple} must be used instead of the braces (for example,
 \texttt{make\_tuple(1,2,5)} instead of \texttt{\{1,2,5\}}).}:
 \begin{lstlisting}
-edges.push_back({1,2,5});
-edges.push_back({2,3,7});
-edges.push_back({2,4,6});
-edges.push_back({3,4,5});
-edges.push_back({4,1,2});
+edges.push((1, 2, 5));
+edges.push((2, 3, 7));
+edges.push((2, 4, 6));
+edges.push((3, 4, 5));
+edges.push((4, 1, 2));
 \end{lstlisting}
 \end{samepage}

@@ -208,13 +208,11 @@ to all nodes of the graph.
 The constant \texttt{INF} denotes an infinite distance.
 
 \begin{lstlisting}
-for (int i = 1; i <= n; i++) distance[i] = INF;
+for i in 1..=n { distance[i] = INF; }
 distance[x] = 0;
-for (int i = 1; i <= n-1; i++) {
-    for (auto e : edges) {
-        int a, b, w;
-        tie(a, b, w) = e;
-        distance[b] = min(distance[b], distance[a]+w);
+for i in 1..=n - 1 {
+    for &(a, b, w) in &edges {
+        distance[b] = distance[b].min(distance[a] + w);
     }
 }
 \end{lstlisting}
@@ -564,18 +562,19 @@ whether a node has been processed.
 Initially the distance is $0$ to $x$ and $\infty$ to all other nodes.
 
 \begin{lstlisting}
-for (int i = 1; i <= n; i++) distance[i] = INF;
+use std::collections::BinaryHeap;
+
+for i in 1..=n { distance[i] = INF; }
 distance[x] = 0;
-q.push({0,x});
-while (!q.empty()) {
-    int a = q.top().second; q.pop();
-    if (processed[a]) continue;
+let mut q = BinaryHeap::new();
+q.push((0, x));
+while let Some((_, a)) = q.pop() {
+    if processed[a] { continue; }
     processed[a] = true;
-    for (auto u : adj[a]) {
-        int b = u.first, w = u.second;
-        if (distance[a]+w < distance[b]) {
-            distance[b] = distance[a]+w;
-            q.push({-distance[b],b});
+    for &(b, w) in &adj[a] {
+        if distance[a] + w < distance[b] {
+            distance[b] = distance[a] + w;
+            q.push((-distance[b], b));
         }
     }
 }
@@ -584,7 +583,7 @@ while (!q.empty()) {
 Note that the priority queue contains \emph{negative}
 distances to nodes.
 The reason for this is that the
-default version of the C++ priority queue finds maximum
+default version of the Rust priority queue finds maximum
 elements, while we want to find minimum elements.
 By using negative distances,
 we can directly use the default priority queue\footnote{Of
@@ -770,21 +769,21 @@ First, the algorithm initializes \texttt{distance}
 using the adjacency matrix \texttt{adj} of the graph:
 
 \begin{lstlisting}
-for (int i = 1; i <= n; i++) {
-    for (int j = 1; j <= n; j++) {
-        if (i == j) distance[i][j] = 0;
-        else if (adj[i][j]) distance[i][j] = adj[i][j];
-        else distance[i][j] = INF;
+for i in 1..=n {
+    for j in 1..=n {
+        if i == j { distance[i][j] = 0; }
+        else if adj[i][j] != 0 { distance[i][j] = adj[i][j]; }
+        else { distance[i][j] = INF; }
     }
 }
 \end{lstlisting}
 After this, the shortest distances can be found as follows:
 \begin{lstlisting}
-for (int k = 1; k <= n; k++) {
-    for (int i = 1; i <= n; i++) {
-        for (int j = 1; j <= n; j++) {
-            distance[i][j] = min(distance[i][j],
-                                   distance[i][k]+distance[k][j]);
+for k in 1..=n {
+    for i in 1..=n {
+        for j in 1..=n {
+            distance[i][j] =
+                distance[i][j].min(distance[i][k] + distance[k][j]);
         }
     }
 }

@@ -42,14 +42,14 @@ The search begins when the function is called
 with parameter 0.
 
 \begin{lstlisting}
-void search(int k) {
-    if (k == n) {
+fn search(k: i32, n: i32, subset: &mut Vec<i32>) {
+    if k == n {
         // process subset
     } else {
-        search(k+1);
-        subset.push_back(k);
-        search(k+1);
-        subset.pop_back();
+        search(k + 1, n, subset);
+        subset.push(k);
+        search(k + 1, n, subset);
+        subset.pop();
     }
 }
 \end{lstlisting}
@@ -143,7 +143,7 @@ The following code goes through the subsets
 of a set of $n$ elements
 
 \begin{lstlisting}
-for (int b = 0; b < (1<<n); b++) {
+for b in 0..(1 << n) {
     // process subset
 }
 \end{lstlisting}
@@ -155,10 +155,10 @@ the code builds a vector that contains the
 elements in the subset.
 
 \begin{lstlisting}
-for (int b = 0; b < (1<<n); b++) {
-    vector<int> subset;
-    for (int i = 0; i < n; i++) {
-        if (b&(1<<i)) subset.push_back(i);
+for b in 0..(1 << n) {
+    let mut subset = Vec::new();
+    for i in 0..n {
+        if b & (1 << i) != 0 { subset.push(i); }
     }
 }
 \end{lstlisting}
@@ -188,17 +188,17 @@ and the search begins when the function is
 called without parameters.
 
 \begin{lstlisting}
-void search() {
-    if (permutation.size() == n) {
+fn search(permutation: &mut Vec<i32>, chosen: &mut Vec<bool>, n: i32) {
+    if permutation.len() == n as usize {
         // process permutation
     } else {
-        for (int i = 0; i < n; i++) {
-            if (chosen[i]) continue;
-            chosen[i] = true;
-            permutation.push_back(i);
-            search();
-            chosen[i] = false;
-            permutation.pop_back();
+        for i in 0..n {
+            if chosen[i as usize] { continue; }
+            chosen[i as usize] = true;
+            permutation.push(i);
+            search(permutation, chosen, n);
+            chosen[i as usize] = false;
+            permutation.pop();
         }
     }
 }
@@ -220,17 +220,29 @@ is to begin with the permutation
 $\{0,1,\ldots,n-1\}$ and repeatedly
 use a function that constructs the next permutation
 in increasing order.
-The C++ standard library contains the function
-\texttt{next\_permutation} that can be used for this:
+The following function \texttt{next\_permutation}
+implements this (Rust's standard library does not
+provide it directly):
 
 \begin{lstlisting}
-vector<int> permutation;
-for (int i = 0; i < n; i++) {
-    permutation.push_back(i);
+fn next_permutation(v: &mut [i32]) -> bool {
+    let n = v.len();
+    if n < 2 { return false; }
+    let mut i = n - 1;
+    while i > 0 && v[i - 1] >= v[i] { i -= 1; }
+    if i == 0 { return false; }
+    let mut j = n - 1;
+    while v[j] <= v[i - 1] { j -= 1; }
+    v.swap(i - 1, j);
+    v[i..].reverse();
+    true
 }
-do {
+
+let mut permutation: Vec<i32> = (0..n).collect();
+loop {
     // process permutation
-} while (next_permutation(permutation.begin(),permutation.end()));
+    if !next_permutation(&mut permutation) { break; }
+}
 \end{lstlisting}
 
 \section{Backtracking}
@@ -343,16 +355,21 @@ There is only one way to place the two remaining queens.
 \begin{samepage}
 The algorithm can be implemented as follows:
 \begin{lstlisting}
-void search(int y) {
-    if (y == n) {
-        count++;
+fn search(y: i32, n: i32, count: &mut i32,
+          column: &mut Vec<i32>, diag1: &mut Vec<i32>, diag2: &mut Vec<i32>) {
+    if y == n {
+        *count += 1;
         return;
     }
-    for (int x = 0; x < n; x++) {
-        if (column[x] || diag1[x+y] || diag2[x-y+n-1]) continue;
-        column[x] = diag1[x+y] = diag2[x-y+n-1] = 1;
-        search(y+1);
-        column[x] = diag1[x+y] = diag2[x-y+n-1] = 0;
+    for x in 0..n {
+        let d1 = (x + y) as usize;
+        let d2 = (x - y + n - 1) as usize;
+        if column[x as usize] == 1 || diag1[d1] == 1 || diag2[d2] == 1 {
+            continue;
+        }
+        column[x as usize] = 1; diag1[d1] = 1; diag2[d2] = 1;
+        search(y + 1, n, count, column, diag1, diag2);
+        column[x as usize] = 0; diag1[d1] = 0; diag2[d2] = 0;
     }
 }
 \end{lstlisting}

@@ -362,8 +362,8 @@ After this, the second phase of the algorithm
 builds the minimum spanning tree as follows:
 
 \begin{lstlisting}
-for (...) {
-  if (!same(a,b)) unite(a,b);
+for &(a, b, _) in &edges {
+    if !same(a, b) { unite(a, b); }
 }
 \end{lstlisting}
 
@@ -505,8 +505,8 @@ the size of the corresponding set.
 
 Initially, each element belongs to a separate set:
 \begin{lstlisting}
-for (int i = 1; i <= n; i++) link[i] = i;
-for (int i = 1; i <= n; i++) size[i] = 1;
+for i in 1..=n { link[i] = i; }
+for i in 1..=n { size[i] = 1; }
 \end{lstlisting}
 
 The function \texttt{find} returns
@@ -515,9 +515,10 @@ The representative can be found by following
 the chain that begins at $x$.
 
 \begin{lstlisting}
-int find(int x) {
-    while (x != link[x]) x = link[x];
-    return x;
+fn find(x: usize, link: &[usize]) -> usize {
+    let mut x = x;
+    while x != link[x] { x = link[x]; }
+    x
 }
 \end{lstlisting}
 
@@ -527,8 +528,8 @@ This can easily be done by using the
 function \texttt{find}:
 
 \begin{lstlisting}
-bool same(int a, int b) {
-    return find(a) == find(b);
+fn same(a: usize, b: usize, link: &[usize]) -> bool {
+    find(a, link) == find(b, link)
 }
 \end{lstlisting}
 
@@ -541,10 +542,10 @@ of the sets and then connects the smaller
 set to the larger set.
 
 \begin{lstlisting}
-void unite(int a, int b) {
-    a = find(a);
-    b = find(b);
-    if (size[a] < size[b]) swap(a,b);
+fn unite(a: usize, b: usize, link: &mut [usize], size: &mut [usize]) {
+    let mut a = find(a, link);
+    let mut b = find(b, link);
+    if size[a] < size[b] { std::mem::swap(&mut a, &mut b); }
     size[a] += size[b];
     link[b] = a;
 }
