@@ -3,13 +3,13 @@
 \indexentry{integer|hyperpage}{6}
 \indexentry{remainder|hyperpage}{7}
 \indexentry{modular arithmetic|hyperpage}{7}
-\indexentry{floating point number|hyperpage}{8}
-\indexentry{tuppdef@\texttt{type} alias|hyperpage}{9}
+\indexentry{floating point number|hyperpage}{7}
+\indexentry{tuppdef@\texttt{type} alias|hyperpage}{8}
 \indexentry{macro|hyperpage}{9}
-\indexentry{arithmetic progression|hyperpage}{11}
+\indexentry{arithmetic progression|hyperpage}{10}
+\indexentry{Faulhaber's formula|hyperpage}{10}
 \indexentry{geometric progression|hyperpage}{11}
-\indexentry{Faulhaber's formula|hyperpage}{11}
-\indexentry{harmonic sum|hyperpage}{12}
+\indexentry{harmonic sum|hyperpage}{11}
 \indexentry{set theory|hyperpage}{12}
 \indexentry{set|hyperpage}{12}
 \indexentry{intersection|hyperpage}{12}
@@ -24,317 +24,317 @@
 \indexentry{disjunction|hyperpage}{13}
 \indexentry{implication|hyperpage}{13}
 \indexentry{equivalence|hyperpage}{13}
-\indexentry{predicate|hyperpage}{14}
-\indexentry{quantifier|hyperpage}{14}
+\indexentry{predicate|hyperpage}{13}
+\indexentry{quantifier|hyperpage}{13}
 \indexentry{factorial|hyperpage}{14}
 \indexentry{Fibonacci number|hyperpage}{14}
-\indexentry{Binet's formula|hyperpage}{15}
-\indexentry{logarithm|hyperpage}{15}
+\indexentry{Binet's formula|hyperpage}{14}
+\indexentry{logarithm|hyperpage}{14}
 \indexentry{natural logarithm|hyperpage}{15}
-\indexentry{time complexity|hyperpage}{19}
-\indexentry{complexity classes|hyperpage}{22}
-\indexentry{constant-time algorithm|hyperpage}{22}
-\indexentry{logarithmic algorithm|hyperpage}{22}
-\indexentry{linear algorithm|hyperpage}{22}
-\indexentry{quadratic algorithm|hyperpage}{22}
-\indexentry{cubic algorithm|hyperpage}{22}
-\indexentry{polynomial algorithm|hyperpage}{23}
-\indexentry{NP-hard problem|hyperpage}{23}
-\indexentry{constant factor|hyperpage}{23}
-\indexentry{maximum subarray sum|hyperpage}{24}
-\indexentry{Kadane's algorithm|hyperpage}{25}
-\indexentry{sorting|hyperpage}{27}
-\indexentry{bubble sort|hyperpage}{27}
-\indexentry{inversion|hyperpage}{28}
-\indexentry{merge sort|hyperpage}{29}
-\indexentry{counting sort|hyperpage}{31}
-\indexentry{sort@\texttt{sort}|hyperpage}{32}
-\indexentry{comparison operator|hyperpage}{33}
-\indexentry{comparison function|hyperpage}{34}
-\indexentry{binary search|hyperpage}{34}
-\indexentry{data structure|hyperpage}{39}
-\indexentry{dynamic array|hyperpage}{39}
-\indexentry{vector|hyperpage}{39}
-\indexentry{string|hyperpage}{40}
-\indexentry{set|hyperpage}{41}
-\indexentry{map|hyperpage}{43}
-\indexentry{iterator|hyperpage}{44}
-\indexentry{bitset|hyperpage}{46}
-\indexentry{deque|hyperpage}{47}
-\indexentry{stack|hyperpage}{47}
-\indexentry{queue|hyperpage}{47}
-\indexentry{priority queue|hyperpage}{48}
-\indexentry{heap|hyperpage}{48}
-\indexentry{subset|hyperpage}{51}
-\indexentry{permutation|hyperpage}{53}
-\indexentry{next\_permutation@\texttt{next\_permutation}|hyperpage}{53}
-\indexentry{backtracking|hyperpage}{54}
-\indexentry{queen problem|hyperpage}{54}
-\indexentry{meet in the middle|hyperpage}{59}
-\indexentry{greedy algorithm|hyperpage}{61}
-\indexentry{data compression|hyperpage}{66}
-\indexentry{binary code|hyperpage}{66}
-\indexentry{codeword|hyperpage}{66}
-\indexentry{Huffman coding|hyperpage}{67}
-\indexentry{dynamic programming|hyperpage}{69}
-\indexentry{memoization|hyperpage}{71}
-\indexentry{longest increasing subsequence|hyperpage}{74}
-\indexentry{knapsack|hyperpage}{77}
-\indexentry{edit distance|hyperpage}{78}
-\indexentry{Levenshtein distance|hyperpage}{78}
-\indexentry{amortized analysis|hyperpage}{83}
-\indexentry{two pointers method|hyperpage}{83}
-\indexentry{2SUM problem|hyperpage}{84}
-\indexentry{3SUM problem|hyperpage}{85}
-\indexentry{nearest smaller elements|hyperpage}{85}
-\indexentry{sliding window|hyperpage}{87}
-\indexentry{sliding window minimum|hyperpage}{87}
-\indexentry{range query|hyperpage}{89}
-\indexentry{sum query|hyperpage}{89}
-\indexentry{minimum query|hyperpage}{89}
-\indexentry{maximum query|hyperpage}{89}
-\indexentry{prefix sum array|hyperpage}{90}
-\indexentry{sparse table|hyperpage}{91}
-\indexentry{binary indexed tree|hyperpage}{92}
-\indexentry{Fenwick tree|hyperpage}{92}
-\indexentry{segment tree|hyperpage}{95}
-\indexentry{index compression|hyperpage}{99}
-\indexentry{difference array|hyperpage}{100}
-\indexentry{bit representation|hyperpage}{101}
-\indexentry{and operation|hyperpage}{102}
-\indexentry{or operation|hyperpage}{102}
-\indexentry{xor operation|hyperpage}{103}
-\indexentry{not operation|hyperpage}{103}
-\indexentry{bit shift|hyperpage}{103}
-\indexentry{Hamming distance|hyperpage}{106}
-\indexentry{graph|hyperpage}{115}
-\indexentry{node|hyperpage}{115}
-\indexentry{edge|hyperpage}{115}
-\indexentry{path|hyperpage}{115}
-\indexentry{cycle|hyperpage}{115}
-\indexentry{connected graph|hyperpage}{116}
-\indexentry{component|hyperpage}{116}
-\indexentry{tree|hyperpage}{116}
-\indexentry{directed graph|hyperpage}{116}
-\indexentry{weighted graph|hyperpage}{117}
-\indexentry{neighbor|hyperpage}{117}
-\indexentry{degree|hyperpage}{117}
-\indexentry{regular graph|hyperpage}{117}
-\indexentry{complete graph|hyperpage}{117}
-\indexentry{indegree|hyperpage}{117}
-\indexentry{outdegree|hyperpage}{117}
-\indexentry{coloring|hyperpage}{118}
-\indexentry{bipartite graph|hyperpage}{118}
-\indexentry{simple graph|hyperpage}{118}
-\indexentry{adjacency list|hyperpage}{119}
-\indexentry{adjacency matrix|hyperpage}{120}
-\indexentry{edge list|hyperpage}{121}
-\indexentry{depth-first search|hyperpage}{123}
-\indexentry{breadth-first search|hyperpage}{125}
-\indexentry{connected graph|hyperpage}{127}
-\indexentry{cycle|hyperpage}{128}
-\indexentry{bipartite graph|hyperpage}{128}
-\indexentry{shortest path|hyperpage}{131}
-\indexentry{Bellman–Ford algorithm|hyperpage}{131}
-\indexentry{negative cycle|hyperpage}{133}
-\indexentry{SPFA algorithm|hyperpage}{134}
-\indexentry{Dijkstra's algorithm|hyperpage}{134}
-\indexentry{Floyd–Warshall algorithm|hyperpage}{137}
-\indexentry{tree|hyperpage}{141}
-\indexentry{leaf|hyperpage}{141}
-\indexentry{root|hyperpage}{141}
-\indexentry{rooted tree|hyperpage}{141}
-\indexentry{child|hyperpage}{141}
-\indexentry{parent|hyperpage}{141}
-\indexentry{subtree|hyperpage}{142}
-\indexentry{diameter|hyperpage}{143}
-\indexentry{binary tree|hyperpage}{147}
-\indexentry{pre-order|hyperpage}{147}
-\indexentry{in-order|hyperpage}{147}
-\indexentry{post-order|hyperpage}{147}
-\indexentry{spanning tree|hyperpage}{149}
-\indexentry{minimum spanning tree|hyperpage}{149}
-\indexentry{maximum spanning tree|hyperpage}{150}
-\indexentry{Kruskal's algorithm|hyperpage}{150}
-\indexentry{union-find structure|hyperpage}{153}
-\indexentry{Prim's algorithm|hyperpage}{155}
-\indexentry{topological sorting|hyperpage}{159}
-\indexentry{cycle|hyperpage}{159}
-\indexentry{Dijkstra's algorithm|hyperpage}{163}
-\indexentry{successor graph|hyperpage}{164}
-\indexentry{functional graph|hyperpage}{164}
-\indexentry{cycle|hyperpage}{165}
-\indexentry{cycle detection|hyperpage}{165}
-\indexentry{Floyd's algorithm|hyperpage}{166}
-\indexentry{strongly connected graph|hyperpage}{169}
-\indexentry{strongly connected component|hyperpage}{169}
-\indexentry{component graph|hyperpage}{169}
-\indexentry{Kosaraju's algorithm|hyperpage}{170}
-\indexentry{2SAT problem|hyperpage}{172}
-\indexentry{3SAT problem|hyperpage}{174}
-\indexentry{tree query|hyperpage}{175}
-\indexentry{ancestor|hyperpage}{175}
-\indexentry{tree traversal array|hyperpage}{176}
-\indexentry{lowest common ancestor|hyperpage}{179}
-\indexentry{Euler tour technique|hyperpage}{180}
-\indexentry{Eulerian path|hyperpage}{187}
-\indexentry{Eulerian circuit|hyperpage}{188}
-\indexentry{Hierholzer's algorithm|hyperpage}{189}
-\indexentry{Hamiltonian path|hyperpage}{191}
-\indexentry{Hamiltonian circuit|hyperpage}{191}
-\indexentry{Dirac's theorem|hyperpage}{192}
-\indexentry{Ore's theorem|hyperpage}{192}
-\indexentry{De Bruijn sequence|hyperpage}{192}
-\indexentry{knight's tour|hyperpage}{193}
-\indexentry{heuristic|hyperpage}{194}
-\indexentry{Warnsdorf's rule|hyperpage}{194}
-\indexentry{flow|hyperpage}{195}
-\indexentry{maximum flow|hyperpage}{195}
-\indexentry{cut|hyperpage}{196}
-\indexentry{minimum cut|hyperpage}{196}
-\indexentry{Ford–Fulkerson algorithm|hyperpage}{196}
-\indexentry{Edmonds–Karp algorithm|hyperpage}{198}
-\indexentry{scaling algorithm|hyperpage}{199}
-\indexentry{minimum cut|hyperpage}{199}
-\indexentry{matching|hyperpage}{201}
-\indexentry{maximum matching|hyperpage}{201}
-\indexentry{Hall's theorem|hyperpage}{203}
-\indexentry{perfect matching|hyperpage}{203}
-\indexentry{Kőnig's theorem|hyperpage}{204}
-\indexentry{node cover|hyperpage}{204}
-\indexentry{minimum node cover|hyperpage}{204}
-\indexentry{independent set|hyperpage}{204}
-\indexentry{maximum independent set|hyperpage}{204}
-\indexentry{path cover|hyperpage}{205}
-\indexentry{Dilworth's theorem|hyperpage}{207}
-\indexentry{antichain|hyperpage}{207}
-\indexentry{number theory|hyperpage}{211}
-\indexentry{divisibility|hyperpage}{211}
-\indexentry{factor|hyperpage}{211}
-\indexentry{divisor|hyperpage}{211}
-\indexentry{prime|hyperpage}{211}
-\indexentry{prime decomposition|hyperpage}{211}
-\indexentry{perfect number|hyperpage}{212}
-\indexentry{Goldbach's conjecture|hyperpage}{213}
-\indexentry{twin prime|hyperpage}{213}
-\indexentry{Legendre's conjecture|hyperpage}{213}
-\indexentry{sieve of Eratosthenes|hyperpage}{214}
-\indexentry{harmonic sum|hyperpage}{214}
-\indexentry{greatest common divisor|hyperpage}{215}
-\indexentry{least common multiple|hyperpage}{215}
-\indexentry{Euclid's algorithm|hyperpage}{215}
-\indexentry{coprime|hyperpage}{215}
-\indexentry{Euler's totient function|hyperpage}{215}
-\indexentry{modular arithmetic|hyperpage}{216}
-\indexentry{Fermat's theorem|hyperpage}{216}
-\indexentry{Euler's theorem|hyperpage}{216}
-\indexentry{modular inverse|hyperpage}{217}
-\indexentry{Diophantine equation|hyperpage}{218}
-\indexentry{extended Euclid's algorithm|hyperpage}{218}
-\indexentry{Chinese remainder theorem|hyperpage}{219}
-\indexentry{Lagrange's theorem|hyperpage}{219}
-\indexentry{Zeckendorf's theorem|hyperpage}{220}
-\indexentry{Fibonacci number|hyperpage}{220}
-\indexentry{Pythagorean triple|hyperpage}{220}
-\indexentry{Euclid's formula|hyperpage}{220}
-\indexentry{Wilson's theorem|hyperpage}{220}
-\indexentry{combinatorics|hyperpage}{221}
-\indexentry{binomial coefficient|hyperpage}{222}
-\indexentry{Pascal's triangle|hyperpage}{223}
-\indexentry{multinomial coefficient|hyperpage}{224}
-\indexentry{Catalan number|hyperpage}{225}
-\indexentry{parenthesis expression|hyperpage}{225}
-\indexentry{inclusion-exclusion|hyperpage}{227}
-\indexentry{derangement|hyperpage}{228}
-\indexentry{Burnside's lemma|hyperpage}{228}
-\indexentry{Cayley's formula|hyperpage}{229}
-\indexentry{Prüfer code|hyperpage}{230}
-\indexentry{matrix|hyperpage}{233}
-\indexentry{vector|hyperpage}{233}
-\indexentry{transpose|hyperpage}{233}
-\indexentry{square matrix|hyperpage}{233}
+\indexentry{time complexity|hyperpage}{17}
+\indexentry{complexity classes|hyperpage}{20}
+\indexentry{constant-time algorithm|hyperpage}{20}
+\indexentry{logarithmic algorithm|hyperpage}{20}
+\indexentry{linear algorithm|hyperpage}{20}
+\indexentry{quadratic algorithm|hyperpage}{20}
+\indexentry{cubic algorithm|hyperpage}{20}
+\indexentry{polynomial algorithm|hyperpage}{20}
+\indexentry{NP-hard problem|hyperpage}{20}
+\indexentry{constant factor|hyperpage}{21}
+\indexentry{maximum subarray sum|hyperpage}{21}
+\indexentry{Kadane's algorithm|hyperpage}{23}
+\indexentry{sorting|hyperpage}{25}
+\indexentry{bubble sort|hyperpage}{25}
+\indexentry{inversion|hyperpage}{26}
+\indexentry{merge sort|hyperpage}{27}
+\indexentry{counting sort|hyperpage}{28}
+\indexentry{sort@\texttt{sort}|hyperpage}{29}
+\indexentry{comparison operator|hyperpage}{30}
+\indexentry{comparison function|hyperpage}{31}
+\indexentry{binary search|hyperpage}{31}
+\indexentry{data structure|hyperpage}{35}
+\indexentry{dynamic array|hyperpage}{35}
+\indexentry{vector|hyperpage}{35}
+\indexentry{string|hyperpage}{36}
+\indexentry{set|hyperpage}{37}
+\indexentry{map|hyperpage}{38}
+\indexentry{iterator|hyperpage}{40}
+\indexentry{bitset|hyperpage}{42}
+\indexentry{deque|hyperpage}{42}
+\indexentry{stack|hyperpage}{43}
+\indexentry{queue|hyperpage}{43}
+\indexentry{priority queue|hyperpage}{44}
+\indexentry{heap|hyperpage}{44}
+\indexentry{subset|hyperpage}{47}
+\indexentry{permutation|hyperpage}{49}
+\indexentry{next\_permutation@\texttt{next\_permutation}|hyperpage}{49}
+\indexentry{backtracking|hyperpage}{50}
+\indexentry{queen problem|hyperpage}{50}
+\indexentry{meet in the middle|hyperpage}{55}
+\indexentry{greedy algorithm|hyperpage}{57}
+\indexentry{data compression|hyperpage}{62}
+\indexentry{binary code|hyperpage}{62}
+\indexentry{codeword|hyperpage}{62}
+\indexentry{Huffman coding|hyperpage}{63}
+\indexentry{dynamic programming|hyperpage}{65}
+\indexentry{memoization|hyperpage}{67}
+\indexentry{longest increasing subsequence|hyperpage}{70}
+\indexentry{knapsack|hyperpage}{73}
+\indexentry{edit distance|hyperpage}{74}
+\indexentry{Levenshtein distance|hyperpage}{74}
+\indexentry{amortized analysis|hyperpage}{79}
+\indexentry{two pointers method|hyperpage}{79}
+\indexentry{2SUM problem|hyperpage}{80}
+\indexentry{3SUM problem|hyperpage}{81}
+\indexentry{nearest smaller elements|hyperpage}{81}
+\indexentry{sliding window|hyperpage}{83}
+\indexentry{sliding window minimum|hyperpage}{83}
+\indexentry{range query|hyperpage}{85}
+\indexentry{sum query|hyperpage}{85}
+\indexentry{minimum query|hyperpage}{85}
+\indexentry{maximum query|hyperpage}{85}
+\indexentry{prefix sum array|hyperpage}{86}
+\indexentry{sparse table|hyperpage}{87}
+\indexentry{binary indexed tree|hyperpage}{88}
+\indexentry{Fenwick tree|hyperpage}{88}
+\indexentry{segment tree|hyperpage}{91}
+\indexentry{index compression|hyperpage}{95}
+\indexentry{difference array|hyperpage}{95}
+\indexentry{bit representation|hyperpage}{97}
+\indexentry{and operation|hyperpage}{98}
+\indexentry{or operation|hyperpage}{98}
+\indexentry{xor operation|hyperpage}{99}
+\indexentry{not operation|hyperpage}{99}
+\indexentry{bit shift|hyperpage}{99}
+\indexentry{Hamming distance|hyperpage}{102}
+\indexentry{graph|hyperpage}{111}
+\indexentry{node|hyperpage}{111}
+\indexentry{edge|hyperpage}{111}
+\indexentry{path|hyperpage}{111}
+\indexentry{cycle|hyperpage}{111}
+\indexentry{connected graph|hyperpage}{112}
+\indexentry{component|hyperpage}{112}
+\indexentry{tree|hyperpage}{112}
+\indexentry{directed graph|hyperpage}{112}
+\indexentry{weighted graph|hyperpage}{113}
+\indexentry{neighbor|hyperpage}{113}
+\indexentry{degree|hyperpage}{113}
+\indexentry{regular graph|hyperpage}{113}
+\indexentry{complete graph|hyperpage}{113}
+\indexentry{indegree|hyperpage}{113}
+\indexentry{outdegree|hyperpage}{113}
+\indexentry{coloring|hyperpage}{114}
+\indexentry{bipartite graph|hyperpage}{114}
+\indexentry{simple graph|hyperpage}{114}
+\indexentry{adjacency list|hyperpage}{115}
+\indexentry{adjacency matrix|hyperpage}{116}
+\indexentry{edge list|hyperpage}{117}
+\indexentry{depth-first search|hyperpage}{119}
+\indexentry{breadth-first search|hyperpage}{121}
+\indexentry{connected graph|hyperpage}{123}
+\indexentry{cycle|hyperpage}{123}
+\indexentry{bipartite graph|hyperpage}{124}
+\indexentry{shortest path|hyperpage}{125}
+\indexentry{Bellman–Ford algorithm|hyperpage}{125}
+\indexentry{negative cycle|hyperpage}{127}
+\indexentry{SPFA algorithm|hyperpage}{128}
+\indexentry{Dijkstra's algorithm|hyperpage}{128}
+\indexentry{Floyd–Warshall algorithm|hyperpage}{131}
+\indexentry{tree|hyperpage}{135}
+\indexentry{leaf|hyperpage}{135}
+\indexentry{root|hyperpage}{135}
+\indexentry{rooted tree|hyperpage}{135}
+\indexentry{child|hyperpage}{135}
+\indexentry{parent|hyperpage}{135}
+\indexentry{subtree|hyperpage}{135}
+\indexentry{diameter|hyperpage}{137}
+\indexentry{binary tree|hyperpage}{141}
+\indexentry{pre-order|hyperpage}{141}
+\indexentry{in-order|hyperpage}{141}
+\indexentry{post-order|hyperpage}{141}
+\indexentry{spanning tree|hyperpage}{143}
+\indexentry{minimum spanning tree|hyperpage}{143}
+\indexentry{maximum spanning tree|hyperpage}{144}
+\indexentry{Kruskal's algorithm|hyperpage}{144}
+\indexentry{union-find structure|hyperpage}{147}
+\indexentry{Prim's algorithm|hyperpage}{149}
+\indexentry{topological sorting|hyperpage}{151}
+\indexentry{cycle|hyperpage}{151}
+\indexentry{Dijkstra's algorithm|hyperpage}{155}
+\indexentry{successor graph|hyperpage}{156}
+\indexentry{functional graph|hyperpage}{156}
+\indexentry{cycle|hyperpage}{157}
+\indexentry{cycle detection|hyperpage}{157}
+\indexentry{Floyd's algorithm|hyperpage}{158}
+\indexentry{strongly connected graph|hyperpage}{159}
+\indexentry{strongly connected component|hyperpage}{159}
+\indexentry{component graph|hyperpage}{159}
+\indexentry{Kosaraju's algorithm|hyperpage}{160}
+\indexentry{2SAT problem|hyperpage}{162}
+\indexentry{3SAT problem|hyperpage}{164}
+\indexentry{tree query|hyperpage}{165}
+\indexentry{ancestor|hyperpage}{165}
+\indexentry{tree traversal array|hyperpage}{166}
+\indexentry{lowest common ancestor|hyperpage}{169}
+\indexentry{Euler tour technique|hyperpage}{170}
+\indexentry{Eulerian path|hyperpage}{175}
+\indexentry{Eulerian circuit|hyperpage}{176}
+\indexentry{Hierholzer's algorithm|hyperpage}{177}
+\indexentry{Hamiltonian path|hyperpage}{179}
+\indexentry{Hamiltonian circuit|hyperpage}{179}
+\indexentry{Dirac's theorem|hyperpage}{179}
+\indexentry{Ore's theorem|hyperpage}{179}
+\indexentry{De Bruijn sequence|hyperpage}{180}
+\indexentry{knight's tour|hyperpage}{181}
+\indexentry{heuristic|hyperpage}{181}
+\indexentry{Warnsdorf's rule|hyperpage}{181}
+\indexentry{flow|hyperpage}{183}
+\indexentry{maximum flow|hyperpage}{183}
+\indexentry{cut|hyperpage}{184}
+\indexentry{minimum cut|hyperpage}{184}
+\indexentry{Ford–Fulkerson algorithm|hyperpage}{184}
+\indexentry{Edmonds–Karp algorithm|hyperpage}{186}
+\indexentry{scaling algorithm|hyperpage}{187}
+\indexentry{minimum cut|hyperpage}{187}
+\indexentry{matching|hyperpage}{189}
+\indexentry{maximum matching|hyperpage}{189}
+\indexentry{Hall's theorem|hyperpage}{191}
+\indexentry{perfect matching|hyperpage}{191}
+\indexentry{Kőnig's theorem|hyperpage}{191}
+\indexentry{node cover|hyperpage}{191}
+\indexentry{minimum node cover|hyperpage}{191}
+\indexentry{independent set|hyperpage}{192}
+\indexentry{maximum independent set|hyperpage}{192}
+\indexentry{path cover|hyperpage}{192}
+\indexentry{Dilworth's theorem|hyperpage}{195}
+\indexentry{antichain|hyperpage}{195}
+\indexentry{number theory|hyperpage}{199}
+\indexentry{divisibility|hyperpage}{199}
+\indexentry{factor|hyperpage}{199}
+\indexentry{divisor|hyperpage}{199}
+\indexentry{prime|hyperpage}{199}
+\indexentry{prime decomposition|hyperpage}{199}
+\indexentry{perfect number|hyperpage}{200}
+\indexentry{Goldbach's conjecture|hyperpage}{201}
+\indexentry{twin prime|hyperpage}{201}
+\indexentry{Legendre's conjecture|hyperpage}{201}
+\indexentry{sieve of Eratosthenes|hyperpage}{202}
+\indexentry{harmonic sum|hyperpage}{202}
+\indexentry{greatest common divisor|hyperpage}{203}
+\indexentry{least common multiple|hyperpage}{203}
+\indexentry{Euclid's algorithm|hyperpage}{203}
+\indexentry{coprime|hyperpage}{203}
+\indexentry{Euler's totient function|hyperpage}{203}
+\indexentry{modular arithmetic|hyperpage}{204}
+\indexentry{Fermat's theorem|hyperpage}{204}
+\indexentry{Euler's theorem|hyperpage}{204}
+\indexentry{modular inverse|hyperpage}{205}
+\indexentry{Diophantine equation|hyperpage}{206}
+\indexentry{extended Euclid's algorithm|hyperpage}{206}
+\indexentry{Chinese remainder theorem|hyperpage}{207}
+\indexentry{Lagrange's theorem|hyperpage}{207}
+\indexentry{Zeckendorf's theorem|hyperpage}{208}
+\indexentry{Fibonacci number|hyperpage}{208}
+\indexentry{Pythagorean triple|hyperpage}{208}
+\indexentry{Euclid's formula|hyperpage}{208}
+\indexentry{Wilson's theorem|hyperpage}{208}
+\indexentry{combinatorics|hyperpage}{209}
+\indexentry{binomial coefficient|hyperpage}{210}
+\indexentry{Pascal's triangle|hyperpage}{211}
+\indexentry{multinomial coefficient|hyperpage}{212}
+\indexentry{Catalan number|hyperpage}{212}
+\indexentry{parenthesis expression|hyperpage}{213}
+\indexentry{inclusion-exclusion|hyperpage}{214}
+\indexentry{derangement|hyperpage}{215}
+\indexentry{Burnside's lemma|hyperpage}{216}
+\indexentry{Cayley's formula|hyperpage}{217}
+\indexentry{Prüfer code|hyperpage}{218}
+\indexentry{matrix|hyperpage}{219}
+\indexentry{vector|hyperpage}{219}
+\indexentry{transpose|hyperpage}{219}
+\indexentry{square matrix|hyperpage}{219}
+\indexentry{matrix multiplication|hyperpage}{220}
+\indexentry{identity matrix|hyperpage}{220}
+\indexentry{matrix power|hyperpage}{221}
+\indexentry{determinant|hyperpage}{221}
+\indexentry{cofactor|hyperpage}{221}
+\indexentry{inverse matrix|hyperpage}{222}
+\indexentry{linear recurrence|hyperpage}{222}
+\indexentry{Fibonacci number|hyperpage}{222}
+\indexentry{Kirchhoff's theorem|hyperpage}{225}
+\indexentry{spanning tree|hyperpage}{225}
+\indexentry{Laplacean matrix|hyperpage}{226}
+\indexentry{probability|hyperpage}{227}
+\indexentry{conditional probability|hyperpage}{229}
+\indexentry{independence|hyperpage}{230}
+\indexentry{random variable|hyperpage}{230}
+\indexentry{expected value|hyperpage}{231}
+\indexentry{distribution|hyperpage}{231}
+\indexentry{uniform distribution|hyperpage}{232}
+\indexentry{binomial distribution|hyperpage}{232}
+\indexentry{geometric distribution|hyperpage}{232}
+\indexentry{Markov chain|hyperpage}{232}
+\indexentry{randomized algorithm|hyperpage}{233}
+\indexentry{Monte Carlo algorithm|hyperpage}{233}
+\indexentry{Las Vegas algorithm|hyperpage}{233}
+\indexentry{order statistic|hyperpage}{234}
 \indexentry{matrix multiplication|hyperpage}{234}
-\indexentry{identity matrix|hyperpage}{234}
-\indexentry{matrix power|hyperpage}{235}
-\indexentry{determinant|hyperpage}{235}
-\indexentry{cofactor|hyperpage}{235}
-\indexentry{inverse matrix|hyperpage}{236}
-\indexentry{linear recurrence|hyperpage}{236}
-\indexentry{Fibonacci number|hyperpage}{236}
-\indexentry{Kirchhoff's theorem|hyperpage}{240}
-\indexentry{spanning tree|hyperpage}{240}
-\indexentry{Laplacean matrix|hyperpage}{240}
-\indexentry{probability|hyperpage}{241}
-\indexentry{conditional probability|hyperpage}{243}
-\indexentry{independence|hyperpage}{244}
-\indexentry{random variable|hyperpage}{244}
-\indexentry{expected value|hyperpage}{245}
-\indexentry{distribution|hyperpage}{245}
-\indexentry{uniform distribution|hyperpage}{246}
-\indexentry{binomial distribution|hyperpage}{246}
-\indexentry{geometric distribution|hyperpage}{246}
-\indexentry{Markov chain|hyperpage}{246}
-\indexentry{randomized algorithm|hyperpage}{247}
-\indexentry{Monte Carlo algorithm|hyperpage}{247}
-\indexentry{Las Vegas algorithm|hyperpage}{248}
-\indexentry{order statistic|hyperpage}{248}
-\indexentry{matrix multiplication|hyperpage}{248}
-\indexentry{quicksort|hyperpage}{248}
-\indexentry{quickselect|hyperpage}{248}
-\indexentry{coloring|hyperpage}{249}
-\indexentry{Freivalds' algoritm|hyperpage}{249}
-\indexentry{winning state|hyperpage}{251}
-\indexentry{losing state|hyperpage}{251}
-\indexentry{nim game|hyperpage}{253}
-\indexentry{nim sum|hyperpage}{253}
-\indexentry{misère game|hyperpage}{254}
-\indexentry{Sprague–Grundy theorem|hyperpage}{254}
-\indexentry{Grundy number|hyperpage}{255}
-\indexentry{mex function|hyperpage}{255}
-\indexentry{Grundy's game|hyperpage}{257}
-\indexentry{pattern matching|hyperpage}{259}
-\indexentry{string|hyperpage}{259}
-\indexentry{alphabet|hyperpage}{259}
-\indexentry{substring|hyperpage}{259}
-\indexentry{subsequence|hyperpage}{259}
-\indexentry{prefix|hyperpage}{259}
-\indexentry{suffix|hyperpage}{259}
-\indexentry{rotation|hyperpage}{259}
-\indexentry{period|hyperpage}{260}
-\indexentry{border|hyperpage}{260}
-\indexentry{lexicographical order|hyperpage}{260}
-\indexentry{trie|hyperpage}{260}
-\indexentry{hashing|hyperpage}{261}
-\indexentry{string hashing|hyperpage}{261}
-\indexentry{hash value|hyperpage}{261}
-\indexentry{polynomial hashing|hyperpage}{261}
-\indexentry{collision|hyperpage}{262}
-\indexentry{birthday paradox|hyperpage}{263}
-\indexentry{Z-algorithm|hyperpage}{264}
-\indexentry{Z-array|hyperpage}{264}
-\indexentry{square root algorithm|hyperpage}{269}
-\indexentry{Mo's algorithm|hyperpage}{273}
-\indexentry{segment tree|hyperpage}{275}
-\indexentry{lazy propagation|hyperpage}{276}
-\indexentry{lazy segment tree|hyperpage}{276}
-\indexentry{dynamic segment tree|hyperpage}{279}
-\indexentry{sparse segment tree|hyperpage}{280}
-\indexentry{persistent segment tree|hyperpage}{280}
-\indexentry{two-dimensional segment tree|hyperpage}{282}
-\indexentry{geometry|hyperpage}{285}
-\indexentry{Heron's formula|hyperpage}{285}
-\indexentry{complex number|hyperpage}{286}
-\indexentry{point|hyperpage}{286}
-\indexentry{vector|hyperpage}{286}
-\indexentry{complex@\texttt{complex}|hyperpage}{286}
-\indexentry{cross product|hyperpage}{288}
-\indexentry{line segment intersection|hyperpage}{289}
-\indexentry{shoelace formula|hyperpage}{291}
-\indexentry{Pick's theorem|hyperpage}{292}
-\indexentry{distance function|hyperpage}{293}
-\indexentry{Euclidean distance|hyperpage}{293}
-\indexentry{Manhattan distance|hyperpage}{293}
-\indexentry{sweep line|hyperpage}{297}
-\indexentry{intersection point|hyperpage}{298}
-\indexentry{closest pair|hyperpage}{299}
-\indexentry{Andrew's algorithm|hyperpage}{301}
+\indexentry{quicksort|hyperpage}{234}
+\indexentry{quickselect|hyperpage}{234}
+\indexentry{Freivalds' algoritm|hyperpage}{234}
+\indexentry{coloring|hyperpage}{235}
+\indexentry{winning state|hyperpage}{237}
+\indexentry{losing state|hyperpage}{237}
+\indexentry{nim game|hyperpage}{239}
+\indexentry{nim sum|hyperpage}{239}
+\indexentry{misère game|hyperpage}{240}
+\indexentry{Sprague–Grundy theorem|hyperpage}{240}
+\indexentry{Grundy number|hyperpage}{240}
+\indexentry{mex function|hyperpage}{240}
+\indexentry{Grundy's game|hyperpage}{243}
+\indexentry{pattern matching|hyperpage}{245}
+\indexentry{string|hyperpage}{245}
+\indexentry{alphabet|hyperpage}{245}
+\indexentry{substring|hyperpage}{245}
+\indexentry{subsequence|hyperpage}{245}
+\indexentry{prefix|hyperpage}{245}
+\indexentry{suffix|hyperpage}{245}
+\indexentry{rotation|hyperpage}{245}
+\indexentry{period|hyperpage}{245}
+\indexentry{border|hyperpage}{246}
+\indexentry{lexicographical order|hyperpage}{246}
+\indexentry{trie|hyperpage}{246}
+\indexentry{hashing|hyperpage}{247}
+\indexentry{string hashing|hyperpage}{247}
+\indexentry{hash value|hyperpage}{247}
+\indexentry{polynomial hashing|hyperpage}{247}
+\indexentry{collision|hyperpage}{248}
+\indexentry{birthday paradox|hyperpage}{249}
+\indexentry{Z-algorithm|hyperpage}{249}
+\indexentry{Z-array|hyperpage}{249}
+\indexentry{square root algorithm|hyperpage}{253}
+\indexentry{Mo's algorithm|hyperpage}{257}
+\indexentry{segment tree|hyperpage}{259}
+\indexentry{lazy propagation|hyperpage}{260}
+\indexentry{lazy segment tree|hyperpage}{260}
+\indexentry{dynamic segment tree|hyperpage}{263}
+\indexentry{sparse segment tree|hyperpage}{263}
+\indexentry{persistent segment tree|hyperpage}{264}
+\indexentry{two-dimensional segment tree|hyperpage}{266}
+\indexentry{geometry|hyperpage}{269}
+\indexentry{Heron's formula|hyperpage}{269}
+\indexentry{complex number|hyperpage}{270}
+\indexentry{point|hyperpage}{270}
+\indexentry{vector|hyperpage}{270}
+\indexentry{complex@\texttt{complex}|hyperpage}{270}
+\indexentry{cross product|hyperpage}{272}
+\indexentry{line segment intersection|hyperpage}{273}
+\indexentry{shoelace formula|hyperpage}{275}
+\indexentry{Pick's theorem|hyperpage}{276}
+\indexentry{distance function|hyperpage}{276}
+\indexentry{Euclidean distance|hyperpage}{276}
+\indexentry{Manhattan distance|hyperpage}{276}
+\indexentry{sweep line|hyperpage}{279}
+\indexentry{intersection point|hyperpage}{280}
+\indexentry{closest pair|hyperpage}{281}
+\indexentry{Andrew's algorithm|hyperpage}{283}
