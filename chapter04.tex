@@ -149,7 +149,7 @@ insertion, search and removal.
 The Rust standard library contains two set
 implementations:
 The structure \texttt{BTreeSet} is based on a balanced
-binary tree and its operations work in $O(\log n)$ time.
+search tree (a B-tree) and its operations work in $O(\log n)$ time.
 The structure \texttt{HashSet} uses hashing,
 and its operations work in $O(1)$ time on average.
 
@@ -278,7 +278,7 @@ The Rust standard library contains two map
 implementations that correspond to the set
 implementations: the structure
 \texttt{BTreeMap} is based on a balanced
-binary tree and accessing elements
+search tree (a B-tree) and accessing elements
 takes $O(\log n)$ time,
 while the structure
 \texttt{HashMap} uses hashing
@@ -297,6 +297,8 @@ m.insert("harpsichord".to_string(), 9);
 println!("{}", m["banana"]); // 3
 \end{lstlisting}
 
+Note that \texttt{m[key]} causes a panic
+if the map does not contain the key.
 If the value of a key is requested
 but the map does not contain it,
 the key can be added to the map with
@@ -456,22 +458,27 @@ use std::collections::BTreeSet;
 
 let s = BTreeSet::from([3,4,6,8,12,13,14,17]);
 let x = 10;
-if let Some(&a) = s.range(x..).next() {
-    println!("{}", a);
-} else if let Some(&b) = s.range(..=x).next_back() {
-    println!("{}", b);
-}
+let next = s.range(x..).next();       // smallest element >= x
+let prev = s.range(..x).next_back();  // largest element < x
+let nearest = match (prev, next) {
+    (None, Some(&a)) => a,
+    (Some(&b), None) => b,
+    (Some(&b), Some(&a)) => if x - b < a - x { b } else { a },
+    (None, None) => unreachable!(), // the set is not empty
+};
+println!("{}", nearest);
 \end{lstlisting}
 
 The code assumes that the set is not empty,
 and goes through all possible cases.
 First, the code looks for the smallest
-element whose value is at least $x$.
-If there is no such element,
-the largest element whose value is at most $x$
-is nearest to $x$.
-Otherwise, the nearest element is either
-the found element or the previous element.
+element whose value is at least $x$
+and the largest element whose value is smaller than $x$.
+If only one of them exists,
+it is nearest to $x$.
+Otherwise, the nearest element is the one
+that is closer to $x$
+(the larger one if the distances are equal).
 
 \section{Other structures}
 
@@ -502,7 +509,7 @@ they require less memory than ordinary arrays,
 because each element in a bitset only
 uses one bit of memory.
 For example,
-if $n$ bits are stored in an \texttt{int} array,
+if $n$ bits are stored in an \texttt{i32} array,
 $32n$ bits of memory will be used,
 but a corresponding bitset only requires $n$ bits of memory.
 In addition, the values of a bitset
@@ -684,7 +691,7 @@ q.pop();
 Rust does not include order-statistics
 data structures in the standard library.
 Such structures are available in external
-crates, for example the \texttt{indexed\_set} crate
+crates, for example the \texttt{indexset} crate
 which provides a set that can be indexed like an array.
 Alternatively, a Fenwick tree (covered later in the book)
 can be used to support similar queries.

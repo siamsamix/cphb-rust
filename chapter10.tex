@@ -19,7 +19,7 @@ a 32-bit type, which means that every \texttt{i32}
 number consists of 32 bits.
 
 Here is the bit representation of
-the \texttt{int} number 43: 
+the \texttt{i32} number 43: 
 \[00000000000000000000000000101011\]
 The bits in the representation are indexed from right to left.
 To convert a bit representation $b_k \cdots b_2 b_1 b_0$ into a number,
@@ -49,7 +49,7 @@ inverting all the bits in the number,
 and then increasing the number by one.
 
 For example, the bit representation of
-the \texttt{int} number $-43$ is
+the \texttt{i32} number $-43$ is
 \[11111111111111111111111111010101.\]
 
 In an unsigned representation, only nonnegative
@@ -88,7 +88,7 @@ println!("{}", x); // -2147483648
 
 Initially, the value of $x$ is $2^{31}-1$.
 This is the largest value that can be stored
-in an \texttt{int} variable,
+in an \texttt{i32} variable,
 so the next number after $2^{31}-1$ is $-2^{31}$.
 
 
@@ -161,11 +161,11 @@ $\XOR$ & 11010 & (26) \\
 
 \index{not operation}
 
-The \key{not} operation \textasciitilde$x$
+The \key{not} operation \texttt{!}$x$
 produces a number where all the bits of $x$
 have been inverted.
-The formula \textasciitilde$x = -x-1$ holds,
-for example, \textasciitilde$29 = -30$.
+The formula \texttt{!}$x = -x-1$ holds,
+for example, \texttt{!}$29 = -30$.
 
 The result of the not operation at the bit level
 depends on the length of the bit representation,
@@ -176,7 +176,7 @@ For example, if the numbers are 32-bit
 \begin{center}
 \begin{tabular}{rrrr}
 $x$ & = & 29 &   00000000000000000000000000011101 \\
-\textasciitilde$x$ & = & $-30$ & 11111111111111111111111111100010 \\
+\texttt{!}$x$ & = & $-30$ & 11111111111111111111111111100010 \\
 \end{tabular}
 \end{center}
 
@@ -207,7 +207,7 @@ so we can use such numbers to access single bits of numbers.
 In particular, the $k$th bit of a number is one
 exactly when $x$ \& $(1 < < k)$ is not zero.
 The following code prints the bit representation
-of an \texttt{int} number $x$:
+of an \texttt{i32} number $x$:
 
 \begin{lstlisting}
 for i in (0..32).rev() {
@@ -221,7 +221,7 @@ of numbers using similar ideas.
 For example, the formula $x$ | $(1 < < k)$
 sets the $k$th bit of $x$ to one,
 the formula
-$x$ \& \textasciitilde $(1 < < k)$
+$x$ \& \texttt{!} $(1 < < k)$
 sets the $k$th bit of $x$ to zero,
 and the formula
 $x$ $\XOR$ $(1 < < k)$
@@ -243,23 +243,23 @@ for counting bits:
 
 \begin{itemize}
 \item
-$\texttt{\_\_builtin\_clz}(x)$:
+$\texttt{leading\_zeros}(x)$:
 the number of zeros at the beginning of the number
 \item
-$\texttt{\_\_builtin\_ctz}(x)$:
+$\texttt{trailing\_zeros}(x)$:
 the number of zeros at the end of the number
 \item
-$\texttt{\_\_builtin\_popcount}(x)$:
+$\texttt{count\_ones}(x)$:
 the number of ones in the number
 \item
-$\texttt{\_\_builtin\_parity}(x)$:
+$\texttt{count\_ones}(x) \bmod 2$:
 the parity (even or odd) of the number of ones
 \end{itemize}
 \begin{samepage}
 
 The functions can be used as follows:
 \begin{lstlisting}
-let x = 5328; // 00000000000000000001010011010000
+let x: i32 = 5328; // 00000000000000000001010011010000
 println!("{}", x.leading_zeros()); // 19
 println!("{}", x.trailing_zeros()); // 4
 println!("{}", x.count_ones()); // 5
@@ -281,8 +281,8 @@ This is an efficient way to represent sets,
 because every element requires only one bit of memory,
 and set operations can be implemented as bit operations.
 
-For example, since \texttt{int} is a 32-bit type,
-an \texttt{int} number can represent any subset
+For example, since \texttt{i32} is a 32-bit type,
+an \texttt{i32} number can represent any subset
 of the set $\{0,1,2,\ldots,31\}$.
 The bit representation of the set $\{1,3,4,8\}$ is
 \[00000000000000000000000100011010,\]
@@ -290,13 +290,13 @@ which corresponds to the number $2^8+2^4+2^3+2^1=282$.
 
 \subsubsection{Set implementation}
 
-The following code declares an \texttt{int}
+The following code declares an \texttt{i32}
 variable $x$ that can contain
 a subset of $\{0,1,2,\ldots,31\}$.
 After this, the code adds the elements 1, 3, 4 and 8
 to the set and prints the size of the set.
 \begin{lstlisting}
-let mut x = 0;
+let mut x: i32 = 0;
 x |= 1 << 1;
 x |= 1 << 3;
 x |= 1 << 4;
@@ -322,8 +322,8 @@ Set operations can be implemented as follows as bit operations:
 \hline
 intersection & $a \cap b$ & $a$ \& $b$ \\
 union & $a \cup b$ & $a$ | $b$ \\
-complement & $\bar a$ & \textasciitilde$a$ \\
-difference & $a \setminus b$ & $a$ \& (\textasciitilde$b$) \\
+complement & $\bar a$ & \texttt{!}$a$ \\
+difference & $a \setminus b$ & $a$ \& (\texttt{!}$b$) \\
 \end{tabular}
 \end{center}
 
@@ -332,8 +332,8 @@ the sets $x=\{1,3,4,8\}$ and $y=\{3,6,8,9\}$,
 and then constructs the set $z = x \cup y = \{1,3,4,6,8,9\}$:
 
 \begin{lstlisting}
-let x = (1 << 1) | (1 << 3) | (1 << 4) | (1 << 8);
-let y = (1 << 3) | (1 << 6) | (1 << 8) | (1 << 9);
+let x: i32 = (1 << 1) | (1 << 3) | (1 << 4) | (1 << 8);
+let y: i32 = (1 << 3) | (1 << 6) | (1 << 8) | (1 << 9);
 let z = x | y;
 println!("{}", z.count_ones()); // 6
 \end{lstlisting}
@@ -351,7 +351,7 @@ for b in 0..(1 << n) {
 The following code goes through
 the subsets with exactly $k$ elements:
 \begin{lstlisting}
-for b in 0..(1 << n) {
+for b in 0u32..(1 << n) {
     if b.count_ones() == k {
         // process subset b
     }
@@ -360,7 +360,7 @@ for b in 0..(1 << n) {
 The following code goes through the subsets
 of a set $x$:
 \begin{lstlisting}
-let mut b = 0;
+let mut b: i32 = 0;
 loop {
     // process subset b
     b = (b.wrapping_sub(x)) & x;
@@ -421,7 +421,7 @@ However, if $k$ is small, we can optimize the code
 by storing the bit strings as integers and
 calculating the Hamming distances using bit operations.
 In particular, if $k \le 32$, we can just store
-the strings as \texttt{int} values and use the
+the strings as \texttt{i32} values and use the
 following function to calculate distances:
 \begin{lstlisting}
 fn hamming(a: i32, b: i32) -> i32 {
@@ -617,7 +617,7 @@ The next step is to calculate the values of the function
 using dynamic programming.
 To store the function values, we declare an array
 \begin{lstlisting}
-let mut total = [[0; N]; 1 << K];
+let mut total = vec![[0; N]; 1 << K];
 \end{lstlisting}
 where $K$ and $N$ are suitably large constants.
 The first dimension of the array corresponds to a bit
@@ -725,7 +725,7 @@ that initially only contains $p$.
 To implement dynamic programming,
 we declare an array
 \begin{lstlisting}
-let mut best = [(0, 0); 1 << N];
+let mut best = vec![(0, 0); 1 << N];
 \end{lstlisting}
 that contains for each subset $S$
 a pair $(\texttt{rides}(S),\texttt{last}(S))$.
@@ -826,7 +826,7 @@ or remove it from $S$.
 There is a particularly clever way to implement the
 calculation of sums. We can declare an array
 \begin{lstlisting}
-let mut sum = [0; 1 << N];
+let mut sum = vec![0; 1 << N];
 \end{lstlisting}
 that will contain the sum of each subset.
 The array is initialized as follows:

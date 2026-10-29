@@ -549,6 +549,11 @@ Most Rust data types implement the \texttt{Ord} trait,
 and elements of those types can be sorted automatically.
 For example, numbers are sorted according to their values
 and strings are sorted in alphabetical order.
+Floating point numbers are an exception:
+because of the value NaN they do not implement \texttt{Ord},
+so \texttt{sort} cannot be used for them.
+A vector \texttt{v} of \texttt{f64} values can be sorted
+using \texttt{v.sort\_by(|a, b| a.total\_cmp(b))}.
 
 Tuples are sorted primarily according to their
 first elements.
@@ -670,20 +675,23 @@ depending on the value of the middle element.
 
 The above idea can be implemented as follows:
 \begin{lstlisting}
-let mut a = 0;
-let mut b = n - 1;
+let mut a: isize = 0;
+let mut b: isize = n as isize - 1;
 while a <= b {
     let k = (a + b) / 2;
-    if array[k] == x {
+    if array[k as usize] == x {
         // x found at index k
     }
-    if array[k] > x { b = k - 1; }
+    if array[k as usize] > x { b = k - 1; }
     else { a = k + 1; }
 }
 \end{lstlisting}
 
 In this implementation, the active region is $a \ldots b$,
 and initially the region is $0 \ldots n-1$.
+The indices have the signed type \texttt{isize}
+because $b$ becomes $-1$ when the target is smaller
+than all elements, which is not possible with an unsigned type.
 The algorithm halves the size of the region at each step,
 so the time complexity is $O(\log n)$.
 
@@ -758,8 +766,13 @@ let b = array.partition_point(|&y| y <= x);
 println!("{}", b - a);
 \end{lstlisting}
 
-The same result can be obtained with
-\texttt{binary\_search}:
+If we only need to know whether the array contains $x$,
+we can also use \texttt{binary\_search}.
+It returns \texttt{Ok(k)} if some element equals $x$,
+where $k$ is the index of such an element
+(if there are several, any of them can be returned),
+and \texttt{Err(k)} otherwise,
+where $k$ is the position where $x$ could be inserted:
 
 \begin{lstlisting}
 match array.binary_search(&x) {

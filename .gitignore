@@ -1,0 +1,12 @@
+# LaTeX build files
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.idx
+*.ilg
+*.ind
+*.out
+*.toc
+*.synctex.gz
+cphb-rust-fixes.patch

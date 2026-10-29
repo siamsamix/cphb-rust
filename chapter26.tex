@@ -184,9 +184,9 @@ we can calculate the number of
 strings that belong to the set and have a
 given string as a prefix.
 
-A trie can be stored in an array
+A trie can be stored in a vector
 \begin{lstlisting}
-let mut trie = [[0; A]; N];
+let mut trie = vec![[0; A]; N];
 \end{lstlisting}
 where $N$ is the maximum number of nodes
 (the maximum total length of the strings in the set)

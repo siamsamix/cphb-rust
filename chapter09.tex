@@ -1101,9 +1101,10 @@ at position $k$ by $x$:
 fn add(k: usize, x: i32) {
     let mut k = k + n;
     tree[k] += x;
+    k /= 2;
     while k >= 1 {
-        k /= 2;
         tree[k] = tree[2*k] + tree[2*k+1];
+        k /= 2;
     }
 }
 \end{lstlisting}

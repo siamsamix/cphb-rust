@@ -568,9 +568,11 @@ An \key{adjacency matrix} is a two-dimensional array
 that indicates which edges the graph contains.
 We can efficiently check from an adjacency matrix
 if there is an edge between two nodes.
-The matrix can be stored as an array
+The matrix can be stored as a vector of vectors
+(a plain array declared inside \texttt{main}
+is stored on the stack, which is too small for large matrices)
 \begin{lstlisting}
-let mut adj = [[0; N]; N];
+let mut adj = vec![vec![0; N]; N];
 \end{lstlisting}
 where each value $\texttt{adj}[a][b]$ indicates
 whether the graph contains an edge from

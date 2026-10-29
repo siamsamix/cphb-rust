@@ -106,13 +106,15 @@ but they are available through the standard library.
 The code can be compiled using the following command:
 
 \begin{lstlisting}
-rustc -O test.rs -o test
+rustc -O --edition 2021 test.rs -o test
 \end{lstlisting}
 
 This command produces a binary file \texttt{test}
 from the source code \texttt{test.rs}.
 The compiler optimizes the code
-(\texttt{-O}).
+(\texttt{-O}) and uses the Rust 2021 edition
+(\texttt{--edition 2021});
+without this option \texttt{rustc} uses the 2015 edition.
 
 \section{Input and output}
 
@@ -130,11 +132,11 @@ spaces and newlines.
 They can be read as follows:
 
 \begin{lstlisting}
-use std::io;
+use std::io::{self, Read};
 
 fn main() {
     let mut input = String::new();
-    io::stdin().read_line(&mut input).unwrap();
+    io::stdin().read_to_string(&mut input).unwrap();
     let mut tokens = input.split_whitespace();
     let a: i32 = tokens.next().unwrap().parse().unwrap();
     let b: i32 = tokens.next().unwrap().parse().unwrap();
@@ -167,22 +169,26 @@ fn main() {
 
 Input and output is sometimes
 a bottleneck in the program.
-Reading all input at once and splitting it into
-tokens makes input and output efficient:
+Reading all input at once, as above, is efficient.
+However, the \texttt{println!} macro
+flushes the output at every newline,
+which is slow if the program prints
+a large number of lines.
+In that case, it is better to write the output
+using a buffered writer:
 
 \begin{lstlisting}
-use std::io::{self, Read};
+use std::io::{self, BufWriter, Write};
 
 fn main() {
-    let mut input = String::new();
-    io::stdin().read_to_string(&mut input).unwrap();
-    let mut tokens = input.split_whitespace();
-    // read tokens here
+    let stdout = io::stdout();
+    let mut out = BufWriter::new(stdout.lock());
+    writeln!(out, "{} {}", 123, 456).unwrap();
 }
 \end{lstlisting}
 
-Note that the \texttt{println!} macro
-works efficiently for output.
+The buffered output is written when \texttt{out}
+goes out of scope at the end of \texttt{main}.
 
 Sometimes the program should read a whole line
 from the input, possibly containing spaces.
@@ -265,23 +271,27 @@ For example, the following code contains
 a subtle error:
 
 \begin{lstlisting}
-let a: i32 = 123456789;
-let b: i64 = (a as i64) * (a as i64);
-println!("{}", b); // correct: 15241578750190521
+fn square(a: i32) -> i64 {
+    (a * a) as i64
+}
+
+fn main() {
+    println!("{}", square(123456789));
+}
 \end{lstlisting}
 
-Even though the variable \texttt{b} is of type \texttt{i64},
-both numbers in the expression \texttt{(a as i64) * (a as i64)}
-are converted to \texttt{i64} before the multiplication,
-so the result is correct.
-The problem would occur if the multiplication were
-done as \texttt{a * a} with \texttt{a} of type \texttt{i32},
-because the result would overflow
-and be truncated to 32 bits.
-The problem can be solved by making sure at least one
-operand is of type \texttt{i64}, for example
-by converting \texttt{a} to \texttt{i64} before
-the multiplication.
+Even though the function returns an \texttt{i64},
+both numbers in the expression \texttt{a * a}
+are of type \texttt{i32}, so the multiplication
+is done with 32 bits and the conversion happens
+only after the overflow.
+In a program compiled with \texttt{-O}
+the result is silently wrong ($-1757895751$),
+while a debug build stops with the error
+''attempt to multiply with overflow''.
+The correct result $15241578750190521$ is obtained
+by converting the numbers before the multiplication,
+for example as \texttt{(a as i64) * (a as i64)}.
 
 Usually contest problems are set so that the
 type \texttt{i64} is enough.
@@ -291,8 +301,8 @@ a 128-bit type \texttt{i128}
 with a value range of
 $-2^{127} \ldots 2^{127}-1$ or about
 $-10^{38} \ldots 10^{38}$.
-However, this type may not be available
-on all target platforms.
+However, calculations with this type are
+slower than with \texttt{i64}.
 
 \subsubsection{Modular arithmetic}
 
@@ -362,13 +372,12 @@ remainder may become negative.
 
 \index{floating point number}
 
-The usual floating point types in
-competitive programming are
-the 64-bit \texttt{f64}
-and, when more precision is needed,
-the 128-bit \texttt{f128}.
-In most cases, \texttt{f64} is enough,
-but \texttt{f128} is more accurate.
+The usual floating point type in
+competitive programming is
+the 64-bit \texttt{f64}, which is enough in most cases.
+(Rust also has a 128-bit type \texttt{f128},
+but it is not available in stable compilers,
+so it cannot be used in contests.)
 
 The required precision of the answer
 is usually given in the problem statement.
@@ -445,11 +454,9 @@ type Ll = i64;
 \end{lstlisting}
 After this, the code
 \begin{lstlisting}
-type Ll = i64;
-
 fn main() {
-    let a: Ll = 123456789;
-    let b: Ll = 987654321;
+    let a: i64 = 123456789;
+    let b: i64 = 987654321;
     println!("{}", a * b);
 }
 \end{lstlisting}
@@ -480,12 +487,11 @@ type Pi = (i32, i32);
 Rust does not have a preprocessor like C++,
 so there are no \texttt{\#define} macros.
 Instead, shortcuts are created with
-functions or Rust's \texttt{macro\_rule!} macros.
+functions or Rust's \texttt{macro\_rules!} macros.
 For example, instead of defining macros for
 accessing the fields of a pair,
-Rust uses \texttt{.0} and \texttt{.1}:
-
-For example, we can write the following code:
+Rust uses \texttt{.0} and \texttt{.1},
+as in the following code:
 \begin{lstlisting}
 fn main() {
     let p: (i32, i32) = (7, 4);
@@ -506,18 +512,26 @@ fn main() {
 This loop runs with \texttt{i} from 1 to \texttt{n}
 inclusive.
 
-Sometimes bugs may be difficult
-to detect. For example, consider the following
-approach for calculating the square of a number
-by inlining the expression:
+Macros in C++ work on text, which can cause bugs
+that are difficult to detect.
+For example, the C++ macro
+\texttt{\#define SQ(a) a*a}
+gives the result $15$ instead of $36$
+for \texttt{SQ(3+3)},
+because the expression becomes \texttt{3+3*3+3}.
+Rust's \texttt{macro\_rules!} macros work on
+syntax trees instead of text,
+so this problem does not occur:
 \begin{lstlisting}
+macro_rules! sq {
+    ($a:expr) => { $a * $a };
+}
+
 fn main() {
-    let a = 3 + 3;
-    println!("{}", a * a); // 36
+    println!("{}", sq!(3 + 3)); // 36
 }
 \end{lstlisting}
-This works as expected.
-A reusable way to do the same is a function:
+A function can also be used:
 \begin{lstlisting}
 fn sq(a: i32) -> i32 {
     a * a
@@ -527,8 +541,6 @@ fn main() {
     println!("{}", sq(3 + 3)); // 36
 }
 \end{lstlisting}
-Using a function avoids precedence pitfalls
-that can occur with textual macros.
 
 \section{Mathematics}
 

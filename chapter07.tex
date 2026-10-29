@@ -633,7 +633,7 @@ Since the function \texttt{sum} has two parameters,
 the dynamic programming array also has two dimensions.
 For example, we can use an array
 \begin{lstlisting}
-let mut sum = [[0; N]; N];
+let mut sum = vec![vec![0; N]; N];
 \end{lstlisting}
 and calculate the sums as follows:
 \begin{lstlisting}
