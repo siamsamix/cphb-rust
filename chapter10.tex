@@ -432,15 +432,19 @@ In the above function, the xor operation constructs
 a bit string that has one bits in positions
 where $a$ and $b$ differ.
 Then, the number of bits is calculated using
-the \texttt{\_\_builtin\_popcount} function.
+the \texttt{count\_ones} method.
 
 To compare the implementations, we generated
 a list of 10000 random bit strings of length 30.
 Using the first approach, the search took
-13.5 seconds, and after the bit optimization,
-it only took 0.5 seconds.
-Thus, the bit optimized code was almost
-30 times faster than the original code.
+$0.3$ seconds, and after the bit optimization,
+it only took $0.04$ seconds.
+Thus, the bit optimized code was about
+9 times faster than the original code.
+The timings in this chapter were measured
+with the programs compiled using \texttt{rustc -O}
+on a 2.1 GHz Intel Xeon processor,
+so they depend on the computer.
 
 \subsubsection{Counting subgrids}
 
@@ -515,7 +519,8 @@ a list of $N$-bit numbers that describe the colors
 of the squares. Now we can process $N$ columns at the same time
 using bit operations. In the following code,
 $\texttt{color}[y][k]$ represents
-a block of $N$ colors as bits.
+a block of $N$ colors as bits
+(each row has $\lfloor n/N \rfloor + 1$ blocks).
 \begin{lstlisting}
 let mut count = 0;
 for i in 0..=n/N {
@@ -526,10 +531,10 @@ The resulting algorithm works in $O(n^3/N)$ time.
 
 We generated a random grid of size $2500 \times 2500$
 and compared the original and bit optimized implementation.
-While the original code took $29.6$ seconds,
-the bit optimized version only took $3.1$ seconds
-with $N=32$ (\texttt{i32} numbers) and $1.7$ seconds
-with $N=64$ (\texttt{i64} numbers).
+While the original code took $9.5$ seconds,
+the bit optimized version only took $0.6$ seconds
+with $N=32$ (\texttt{u32} numbers) and $0.3$ seconds
+with $N=64$ (\texttt{u64} numbers).
 
 \section{Dynamic programming}
 

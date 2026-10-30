@@ -10,3 +10,4 @@
 *.toc
 *.synctex.gz
 cphb-rust-fixes.patch
+cphb-rust-fixes-chapter10-timings.patch
